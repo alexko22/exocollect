@@ -9,6 +9,24 @@
         {{profile.username}}
         {{profile.bio}}
     </h3>
+    &nbsp;
+    <!-- we can refine display all of a users planets on their profile -->
+    <!-- might need to adjust the fields of the planet model later -->
+    <h1> Your Planets: </h1>
+    {% for planet in profile.get_planets %}
+    <table>
+        <tr>
+            <td>
+                {{planet.designation}}
+            </td>
+            <td>
+                {{planet.mass}}
+            </td>
+            <td> {{planet.gravity}} </td>
+            <td> {{planet.comp}} </td>
+        </tr>
+    </table>
+    {% endfor %}
 </div>
 
 {% endblock %}

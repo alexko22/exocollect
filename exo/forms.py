@@ -11,4 +11,4 @@ class CreateProfilesForm(forms.ModelForm):
         ''' associating form to profile model '''
         model = Profiles
         # which fields we want to display
-        fields = ['username', 'bio']
+        fields = ['display_name', 'bio']

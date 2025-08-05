@@ -5,13 +5,18 @@ from django.urls import reverse
 
 # Create your models here.
 class Profiles(models.Model):
-    username = models.TextField(blank=True)
+    display_name = models.TextField(blank=True)
     bio = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         ''' returns string version of the model '''
-        return f'{self.username}'
+        return f'{self.display_name}'
+    
+    def get_planets(self):
+        ''' gets all the planets associated with the current user via profile '''
+        planets = Planet.objects.filter(prof=self)
+        return planets
     
 class Planet(models.Model):
     designation = models.TextField(blank=True)

@@ -1,9 +1,53 @@
-<!-- HTML FILE FOR HOME SCREEN -->
 {% extends 'exo/base.html' %}
 
 
 {% block content %}
-<h1> Home Page </h1>
+<section class="fullscreen-container">
+    <div class="content-box">
+        <h1 class="display-3 fw-bold">Welcome to ExoCollect</h1>
+        <p class="lead">Explore the universe through an interactive journey across planets and space science!</p>
+        <div class="mt-4">
+            <a href="{% url 'login' %}" class="btn btn-outline-light btn-lg me-3">Login</a>
+            <a href="{% url 'signup' %}" class="btn btn-outline-success btn-lg">Sign Up</a>
+        </div>
+        <div class="mt-4">
+            <a href="{% url 'exocollect_start' %}" class="btn btn-primary btn-lg">Start Exploring</a>
+        </div>
+    </div>
+</section>
 
+<style>
+    html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 
+    body {
+        background: url('https://images.pexels.com/photos/1252890/pexels-photo-1252890.jpeg?cs=srgb&dl=pexels-krisof-1252890.jpg&fm=jpg') no-repeat center center fixed;
+        background-size: cover;
+        font-family: Arial, sans-serif;
+    }
+
+    .fullscreen-container {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .content-box {
+        background-color: rgba(30, 30, 60, 0.85);
+        padding: 40px;
+        border-radius: 15px;
+        color: white;
+        width: 100%;
+        max-width: 700px;
+    }
+
+    .btn-outline-light, .btn-outline-success, .btn-primary {
+        min-width: 160px;
+    }
+</style>
 {% endblock %}

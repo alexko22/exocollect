@@ -7,7 +7,7 @@ from . import views
 # url patterns
 urlpatterns = [
     path('signup/', views.CreateProfileView.as_view(), name="signup"),
-    path('login/', auth_views.LoginView.as_view(template_name='exo/login.html'), name="login"),
+    path('login/', CustomLoginView.as_view(), name="login"),
     path('start/', views.start_game, name="exocollect_start"),
-    path('profile/', views.profile, name="profile"),
+    path('profile/<int:pk>', views.ShowProfileView.as_view(), name="profile"),
 ]

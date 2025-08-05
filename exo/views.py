@@ -9,6 +9,8 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login
 from .forms import *
+from django.contrib.auth.views import LoginView
+
 # from plotly (for team type graphing)
 # import plotly
 # import plotly.graph_objs as go
@@ -38,13 +40,27 @@ class CreateProfileView(View):
             profile = profile_form.save(commit=False)
             profile.user = user
             profile.save()
-            return redirect("profile")  # Or wherever you want to redirect after signup
+            return redirect(reverse("profile", kwargs={"pk": profile.pk}))
 
         return render(request, "exo/signup.html", {
             "user_form": user_form,
             "profile_form": profile_form
         })
+    
+class CustomLoginView(LoginView):
+    template_name = 'exo/login.html'
 
+    def get_success_url(self):
+        return reverse('profile', kwargs={'pk': Profiles.objects.get(user=self.request.user).pk
+})
+
+class ShowProfileView(DetailView, LoginRequiredMixin):
+    ''' show the current users profile '''
+    model = Profiles
+    template_name = "exo/profile.html"
+    context_object_name = "profile"
+
+    
 # def signup(request):
     # if request.method == "POST":
         # form = UserCreationForm(request.POST)
@@ -58,6 +74,6 @@ class CreateProfileView(View):
 def start_game(request):
     return render(request, 'exo/start_game.html')
 
-@login_required
-def profile(request):
-    return render(request, 'exo/profile.html', {'user': request.user})
+# @login_required
+# def profile(request):
+    # return render(request, 'exo/profile.html', {'user': request.user})

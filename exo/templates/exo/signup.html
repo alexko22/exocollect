@@ -7,11 +7,17 @@
 <body>
 <div class="container mt-5">
     <h2>Signup</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-success">Create Account</button>
-    </form>
+    <form method="POST">
+    {% csrf_token %}
+
+    <h4>User Info</h4>
+    {{ user_form.as_p }}
+
+    <h4>Profile Info</h4>
+    {{ profile_form.as_p }}
+
+    <button type="submit" class="btn btn-success">Create Account</button>
+</form>
 </div>
 </body>
 </html>

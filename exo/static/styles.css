@@ -1,3 +1,36 @@
 h1 {
-    color: blue !important;
+    color: blue;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: url('https://images.pexels.com/photos/1252890/pexels-photo-1252890.jpeg?cs=srgb&dl=pexels-krisof-1252890.jpg&fm=jpg') no-repeat center center fixed;
+    background-size: cover;
+    font-family: Arial, sans-serif;
+}
+
+.fullscreen-container {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.content-box {
+    background-color: rgba(30, 30, 60, 0.85);
+    padding: 40px;
+    border-radius: 15px;
+    color: white;
+    width: 100%;
+    max-width: 700px;
+}
+
+.btn-outline-light, .btn-outline-success, .btn-primary {
+    min-width: 160px;
 }

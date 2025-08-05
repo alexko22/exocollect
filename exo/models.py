@@ -12,3 +12,14 @@ class Profiles(models.Model):
     def __str__(self):
         ''' returns string version of the model '''
         return f'{self.username}'
+    
+class Planet(models.Model):
+    designation = models.TextField(blank=True)
+    mass = models.FloatField(blank=True)
+    gravity = models.FloatField(blank=True)
+    comp = models.JSONField(blank=True)
+    prof = models.ForeignKey(Profiles, on_delete=models.CASCADE)
+
+    def __str__(self):
+        ''' returns a string version of the model '''
+        return f'{self.designation}'

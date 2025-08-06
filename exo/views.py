@@ -61,7 +61,12 @@ class ShowProfileView(DetailView, LoginRequiredMixin):
     template_name = "exo/profile.html"
     context_object_name = "profile"
 
-    
+class PlanetView(DetailView):
+    ''' class to view an individual planet screen '''
+    model = Planet
+    template_name = "exo/show_planet.html"
+    context_object_name = "planet"
+
 # def signup(request):
     # if request.method == "POST":
         # form = UserCreationForm(request.POST)
@@ -90,7 +95,7 @@ def generate_random_planet(request):
     gravity = round(random.uniform(3.0, 25.0), 1)
     comp = random.choice(COMPOSITIONS)
 
-    Planet.objects.create(
+    planet = Planet.objects.create(
         profile=profile,
         designation=name,
         mass=mass,
@@ -98,4 +103,4 @@ def generate_random_planet(request):
         comp=comp,
     )
 
-    return redirect('profile', pk=profile.pk)
+    return redirect('show_planet', pk=planet.pk)

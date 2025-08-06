@@ -11,4 +11,5 @@ urlpatterns = [
     path('start/', views.start_game, name="exocollect_start"),
     path('profile/<int:pk>', views.ShowProfileView.as_view(), name="profile"),
     path('generate-planet/', views.generate_random_planet, name='generate_planet'),
+    path('planet/<int:pk>', PlanetView.as_view(), name="show_planet"),
 ]

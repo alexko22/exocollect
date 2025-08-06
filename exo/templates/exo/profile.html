@@ -30,6 +30,8 @@
             </td>
             <td> {{planet.gravity}} </td>
             <td> {{planet.comp}} </td>
+            <!-- link to the corresponding planet view page -->
+            <td> <a href="{% url 'show_planet' planet.pk %}"> Planet Page </a> </td>
         </tr>
     </table>
     {% endfor %}

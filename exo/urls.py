@@ -10,4 +10,5 @@ urlpatterns = [
     path('login/', CustomLoginView.as_view(), name="login"),
     path('start/', views.start_game, name="exocollect_start"),
     path('profile/<int:pk>', views.ShowProfileView.as_view(), name="profile"),
+    path('generate-planet/', views.generate_random_planet, name='generate_planet'),
 ]

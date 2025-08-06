@@ -7,7 +7,7 @@ from django.urls import reverse
 class Profiles(models.Model):
     display_name = models.TextField(blank=True)
     bio = models.TextField(blank=True)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
 
     def __str__(self):
         ''' returns string version of the model '''
@@ -15,7 +15,7 @@ class Profiles(models.Model):
     
     def get_planets(self):
         ''' gets all the planets associated with the current user via profile '''
-        planets = Planet.objects.filter(prof=self)
+        planets = Planet.objects.filter(profile=self)
         return planets
     
 class Planet(models.Model):
@@ -23,7 +23,7 @@ class Planet(models.Model):
     mass = models.FloatField(blank=True)
     gravity = models.FloatField(blank=True)
     comp = models.JSONField(blank=True)
-    prof = models.ForeignKey(Profiles, on_delete=models.CASCADE)
+    profile = models.ForeignKey(Profiles, on_delete=models.CASCADE, related_name='planets')
 
     def __str__(self):
         ''' returns a string version of the model '''

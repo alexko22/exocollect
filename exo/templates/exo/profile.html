@@ -12,6 +12,12 @@
     &nbsp;
     <!-- we can refine display all of a users planets on their profile -->
     <!-- might need to adjust the fields of the planet model later -->
+
+    <form action="{% url 'generate_planet' %}" method="post" class="mb-4">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">Generate Random Planet</button>
+    </form>
+
     <h1> Your Planets: </h1>
     {% for planet in profile.get_planets %}
     <table>

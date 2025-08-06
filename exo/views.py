@@ -1,6 +1,7 @@
 # Create your views here.
 # import statements
-from django.shortcuts import render, redirect
+import random
+from django.shortcuts import get_object_or_404, render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, TemplateView
 from .models import *
 from django.urls import reverse
@@ -77,3 +78,24 @@ def start_game(request):
 # @login_required
 # def profile(request):
     # return render(request, 'exo/profile.html', {'user': request.user})
+
+COMPOSITIONS = ["Gas Giant", "Rocky", "Icy", "Oceanic", "Carbon"]
+
+@login_required
+def generate_random_planet(request):
+    profile = get_object_or_404(Profiles, user=request.user)
+
+    name = f"Planet-{random.randint(1000, 9999)}"
+    mass = round(random.uniform(0.1, 10.0), 2)
+    gravity = round(random.uniform(3.0, 25.0), 1)
+    comp = random.choice(COMPOSITIONS)
+
+    Planet.objects.create(
+        profile=profile,
+        designation=name,
+        mass=mass,
+        gravity=gravity,
+        comp=comp,
+    )
+
+    return redirect('profile', pk=profile.pk)

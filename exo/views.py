@@ -119,13 +119,35 @@ G_CONST = 9.8
 
 NAME_PREFIXES = ["Astra", "Nova", "Vortex", "Zenith", "Orion", "Luna", "Eclipse", "Nebula", "Solara", "Galaxis"]
 
+def weighted_sample_without_replacement(elements, weights, k):
+    assert k <= len(elements), "Cannot sample more elements than available"
+    elements_and_weights = list(zip(elements, weights))
+    selected = []
+
+    # Make a copy so we don't modify original
+    elems_weights = elements_and_weights[:]
+
+    for _ in range(k):
+        total_weight = sum(w for e, w in elems_weights)
+        pick = random.uniform(0, total_weight)
+        cumulative = 0
+        for i, (e, w) in enumerate(elems_weights):
+            cumulative += w
+            if pick <= cumulative:
+                selected.append(e)
+                # Remove selected so no repeats
+                elems_weights.pop(i)
+                break
+    return selected
 
 @login_required
 def generate_random_planet(request):
     profile = get_object_or_404(Profiles, user=request.user)
 
     p_type = random.choices(P_TYPES, weights=P_TYPE_PROB, k=1)[0]
-    comp = random.choices(COMPOSITIONS, weights=ATMOS_PROBS[p_type], k=3)
+
+    probabilities = ATMOS_PROBS[p_type]
+    comp = weighted_sample_without_replacement(COMPOSITIONS, probabilities, 3)    
     mass_min, mass_max = MASS_RANGES[p_type]
     mass = round(random.uniform(mass_min, mass_max), 2)
     # helper for gravity calculation

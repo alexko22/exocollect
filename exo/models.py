@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
+from django.templatetags.static import static
 
 
 # Create your models here.
@@ -23,8 +24,14 @@ class Planet(models.Model):
     mass = models.FloatField(blank=True)
     gravity = models.FloatField(blank=True)
     comp = models.JSONField(blank=True)
+    p_type = models.TextField(blank=True)
     profile = models.ForeignKey(Profiles, on_delete=models.CASCADE, related_name='planets')
 
     def __str__(self):
         ''' returns a string version of the model '''
         return f'{self.designation}'
+    
+    # incomplete
+    @property
+    def get_image(self):
+        return static('images/planet_templates/blue_planet.png')

@@ -9,7 +9,7 @@ html, body {
 }
 
 body {
-    background: url('https://images.pexels.com/photos/1252890/pexels-photo-1252890.jpeg?cs=srgb&dl=pexels-krisof-1252890.jpg&fm=jpg') no-repeat center center fixed;
+    background: black;
     background-size: cover;
     font-family: Arial, sans-serif;
 }

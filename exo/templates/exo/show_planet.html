@@ -1,25 +1,106 @@
 {% extends 'exo/base.html' %}
 
-
 {% block content %}
-<!-- planet image will be implemented here later -->
-<table>
-    <tr>
-        <td>
-            {{planet.designation}}
-        </td>
-        <td>
-            {{planet.mass}}
-        </td>
-        <td>
-            {{planet.gravity}}
-        </td>
-        <td>
-            {{planet.comp}}
-        </td>
-    </tr>
-</table>
-<h2> <a href="{% url 'profile' planet.profile.pk %}"> Back to Profile </a> </h2>
+<div class="planet-container">
+  <img src="{{ planet.get_image }}" alt="Planet Image" class="planet-image" />
+  <h1 class="planet-name">Name: {{ planet.designation }}</h1>
 
+  <table class="planet-stats">
+    <tbody>
+      <tr>
+        <th>Type</th>
+        <td>{{ planet.p_type }}</td>
+      </tr>
+      <tr>
+        <th>Atmosphere</th>
+        <td>{{ planet.comp }}</td>
+      </tr>
+      <tr>
+        <th>Gravity</th>
+        <td>{{ planet.gravity }}</td>
+      </tr>
+      <tr>
+        <th>Mass</th>
+        <td>{{ planet.mass }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><a href="{% url 'profile' planet.profile.pk %}" class="back-link">← Back to Profile</a></h2>
+</div>
+
+<style>
+  body {
+    background-color: #000000 !important;
+    color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .planet-container {
+    max-width: 600px;
+    margin: 3rem auto;
+    padding: 2rem;
+    background: #111111;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(255, 255, 255, 0.1);
+    text-align: center;
+  }
+
+  .planet-image {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+    margin-bottom: 1.5rem;
+  }
+
+  .planet-name {
+    font-weight: 700;
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+  }
+
+  .planet-stats {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 2rem;
+  }
+
+  .planet-stats th,
+  .planet-stats td {
+    padding: 0.75rem 1.25rem;
+    text-align: left;
+  }
+
+  .planet-stats th {
+    background-color: #222222;
+    font-weight: 600;
+    border-radius: 8px 0 0 8px;
+    width: 30%;
+  }
+
+  .planet-stats td {
+    background-color: #1a1a1a;
+    border-radius: 0 8px 8px 0;
+  }
+
+  .back-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid #00aaff;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .back-link:hover,
+  .back-link:focus {
+    background-color: #00aaff;
+    color: #000;
+  }
+</style>
 
 {% endblock %}

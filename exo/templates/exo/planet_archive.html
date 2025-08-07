@@ -6,6 +6,9 @@
 <table>
     <tr>
     <td>
+        Image
+    </td>
+    <td>
         Name
     </td>
     <td>
@@ -26,6 +29,9 @@
     </tr>
     {% for planet in planets %}
     <tr>
+        <td>
+            <img src="{{ planet.get_image }}" alt="Planet Image" class="planet-image" />
+        </td>
         <td>
             {{planet.designation}}
         </td>

@@ -9,7 +9,7 @@ html, body {
 }
 
 body {
-    background: black;
+    background: url('../static/images/bg.jpg') no-repeat center center fixed;
     background-size: cover;
     font-family: Arial, sans-serif;
 }
@@ -33,4 +33,54 @@ body {
 
 .btn-outline-light, .btn-outline-success, .btn-primary {
     min-width: 160px;
+}
+
+.top-bar {
+    position: static;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100px; /* smaller height */
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    z-index: 1000; /* ensures it appears above background */
+}
+
+.logo-left {
+    height: 100px; /* shrink the logo to fit the smaller bar */
+    margin-left: 0px;
+}
+
+.white-text {
+    color: white;
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+}
+
+.nav-btn {
+    height: 60px; /* shrink the buttons to fit the smaller bar */
+    width: auto;
+    object-fit: contain;
+}
+
+.top-center {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: orange;
+    font-weight: bold;
+    white-space: nowrap;
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.login-btn {
+    margin-left: 20px;
 }

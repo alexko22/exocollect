@@ -2,6 +2,34 @@
 <!-- all templates should inherit from this file... -->
 
 {% load static %}
+<div class="top-bar">
+    <a href="{% url 'home' %}">
+        <img src="{% static 'images/logo.png' %}" class="logo-left" alt="ExoCollect Logo">
+    </a>
+
+    <div class="nav-right">
+        {% if user.is_authenticated %}
+            <div class="top-center">
+                <span class="username">Welcome, {{ user.username }}</span>
+            </div>
+
+            <form method="post" action="{% url 'logout' %}" style="display:inline;">
+                {% csrf_token %}
+                <button type="submit" class="logout-btn" style="border: none; background: none; padding: 0; cursor: pointer">
+                    <img src="{% static 'images/buttons/logout.png' %}" class="nav-btn" alt="Logout">
+                </button>
+            </form>
+        {% else %}
+            <a href="{% url 'signup' %}">
+                <img src="{% static 'images/buttons/sign_up.png' %}" class="nav-btn" alt="Sign Up">
+            </a>
+            <a href="{% url 'login' %}">
+                <img src="{% static 'images/buttons/login.png' %}" class="nav-btn login-btn" alt="Login">
+            </a>
+        {% endif %}
+    </div>
+</div>
+
  <html>
     <head>
         <title> ExoCollect </title> 

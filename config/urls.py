@@ -19,9 +19,11 @@ from django.urls import path, include
 from exo import views
 from django.contrib.auth import views as auth_views 
 from exo.views import ShowHome
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('exocollect/', include("exo.urls")),
     path('', ShowHome.as_view(), name="home"),
+    path('logout/', LogoutView.as_view(next_page='home'), name='logout'),
 ]

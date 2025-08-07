@@ -12,4 +12,5 @@ urlpatterns = [
     path('profile/<int:pk>', views.ShowProfileView.as_view(), name="profile"),
     path('generate-planet/', views.generate_random_planet, name='generate_planet'),
     path('planet/<int:pk>', PlanetView.as_view(), name="show_planet"),
+    path('planets', PlanetArchive.as_view(), name="planet_archive" ),
 ]

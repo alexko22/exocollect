@@ -1,0 +1,51 @@
+{% extends 'exo/base.html' %}
+
+{% block content %}
+<h1> Planet Archive </h1>
+
+<table>
+    <tr>
+    <td>
+        Name
+    </td>
+    <td>
+        Type
+    </td>
+    <td>
+        Atmopshere
+    </td>
+    <td>
+        Mass
+    </td>
+    <td>
+        Gravity
+    </td>
+    <td>
+        Discoverer
+    </td>
+    </tr>
+    {% for planet in planets %}
+    <tr>
+        <td>
+            {{planet.designation}}
+        </td>
+        <td>
+            {{planet.p_type}}
+        </td>
+        <td>
+            {{planet.comp}}
+        </td>
+        <td>
+            {{planet.mass}}
+        </td>
+        <td>
+            {{planet.gravity}}
+        </td>
+        <td>
+            {{planet.profile.display_name}}
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

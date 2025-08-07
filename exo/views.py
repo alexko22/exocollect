@@ -67,6 +67,12 @@ class PlanetView(DetailView):
     template_name = "exo/show_planet.html"
     context_object_name = "planet"
 
+class PlanetArchive(ListView):
+    ''' class to show an archive of ALL planets '''
+    model = Planet
+    template_name = "exo/planet_archive.html"
+    context_object_name = "planets"
+
 # def signup(request):
     # if request.method == "POST":
         # form = UserCreationForm(request.POST)

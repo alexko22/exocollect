@@ -128,3 +128,11 @@ table {
         font-size: 1.2rem;
         line-height: 1.6;
     }
+
+.nav_mov {
+    margin-right: 32px;
+}
+
+p {
+    color:white;
+}

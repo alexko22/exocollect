@@ -8,11 +8,16 @@
     </a>
 
     <div class="nav-right">
+        <a href="{% url 'home' %}" class="nav_mov">
+                <img src="{% static 'images/buttons/home.png' %}" class="nav-btn" alt="Archive">
+            </a>
+        <a href="{% url 'planet_archive' %}" class="nav_mov">
+                <img src="{% static 'images/buttons/archive.png' %}" class="nav-btn" alt="Archive">
+            </a>
         {% if user.is_authenticated %}
-            <div class="top-center">
-                <span class="username">Welcome, {{ user.username }}</span>
-            </div>
-
+            <a href="{% url 'profile' pro.pk %}">
+                <img src="{% static 'images/buttons/profile.png' %}" class="nav-btn" alt="Profile">
+            </a>
             <form method="post" action="{% url 'logout' %}" style="display:inline;">
                 {% csrf_token %}
                 <button type="submit" class="logout-btn" style="border: none; background: none; padding: 0; cursor: pointer">
@@ -36,6 +41,8 @@
         <link rel="stylesheet" href="{% static 'styles.css' %}">
     </head>
     <body>
+        <p>User authenticated? {{ user.is_authenticated }}</p>
+        <p>User: {{ user }}</p>
         {% block content %}
         {% endblock %}
     </body>

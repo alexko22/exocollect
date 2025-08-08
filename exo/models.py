@@ -32,7 +32,7 @@ class Planet(models.Model):
         ''' returns a string version of the model '''
         return f'{self.designation}'
     
-    # incomplete:
+    # this is a work in progress
     @property
     def get_image(self):
         comp = self.comp or []

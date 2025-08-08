@@ -1,8 +1,10 @@
 {% extends 'exo/base.html' %}
+{% load static %}
 
 
 {% block content %}
 
+<!--
 <section class="fullscreen-container">
     <div class="content-box">
         <h1 class="display-3 fw-bold">Welcome to ExoCollect</h1>
@@ -16,5 +18,21 @@
             <a href="{% url 'planet_archive' %}" class="btn btn-primary btn-lg">Planet Archive</a>
         </div>
     </div>
-</section>
+</section> -->
+
+<div class="home-container">
+    <div class="section logo-section">
+        <img src="{% static 'images/placeholder.png' %}" alt="ExoCollect Logo Under Construction">
+    </div>
+
+    <div class="section mission-section">
+        <div>
+            <h2>What is Exocollect?</h2>
+            <p>
+                ExoCollect is a student and recent graduate-led initiative dedicated to reigniting curiosity about space and the wonders of exploration. Our goal is to help people grasp the vast scale and diverse composition of the universe, and to appreciate just how rare and special our own planet truly is. We do this through a gamified planet generation experience that makes learning about the cosmos engaging, interactive, and accessible to all. To get started create or log in to an existing profile! No email or personal data required!
+            </p>
+        </div>
+    </div>
+</div>
+
 {% endblock %}

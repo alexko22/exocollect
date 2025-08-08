@@ -88,3 +88,43 @@ body {
 table {
     color: white;
 }
+
+    .home-container {
+        display: flex;
+        flex-direction: column;
+        height: 100vh;
+        gap: 2rem;
+        padding: 3rem;
+        box-sizing: border-box;
+    }
+    .section {
+        flex: 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+        border-radius: 12px;
+        box-sizing: border-box;
+    }
+    .logo-section {
+    background-color: orange;
+    padding: 0.5rem;       /* padding around the image */
+    border-radius: 12px;
+    box-sizing: border-box;
+    }
+
+.logo-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* or 'cover' if you want it to fill fully and crop */
+    border-radius: 8px;  /* optional: round image corners slightly */
+    display: block;      /* remove inline gap */
+}
+
+    .mission-section {
+        background-color: rgb(0, 48, 104);
+        color: white;
+        font-size: 1.2rem;
+        line-height: 1.6;
+    }

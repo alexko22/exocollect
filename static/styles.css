@@ -152,3 +152,133 @@ p {
   margin-bottom: 1px;
   font-family: Verdana, Geneva, Tahoma, sans-serif
 }
+
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Profile logo styling */
+.profile-header {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2rem;
+}
+
+.profile-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid orange;
+  margin-bottom: 0.5rem;
+}
+
+/* Table styling for sleek black background and white text */
+.planet-table {
+    width: 100%;
+    max-width: 900px;
+    border-collapse: separate;
+    border-spacing: 0 10px;
+    background-color: #000; /* black background */
+    color: #fff;            /* white text */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 165, 0, 0.6); /* subtle orange glow */
+}
+
+/* Table headers */
+.planet-table thead tr {
+    background-color: #111; /* slightly lighter black */
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
+.planet-table thead th {
+    padding: 12px 15px;
+    border-bottom: 2px solid orange;
+}
+
+/* Table body rows */
+.planet-table tbody tr {
+    background-color: #111;
+    transition: background-color 0.3s ease;
+}
+
+.planet-table tbody tr:hover {
+    background-color: #222;
+}
+
+/* Table cells */
+.planet-table tbody td {
+    padding: 12px 15px;
+    vertical-align: middle;
+}
+
+/* Planet image */
+.planet-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 1px solid orange;
+}
+
+/* Button adjustments */
+.btn-outline-info {
+    border-color: #ffa500;
+    color: #ffa500;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-info:hover {
+    background-color: #ffa500;
+    color: #000;
+}
+
+/* Generate button spacing */
+form.mb-4 {
+    margin-bottom: 40px;
+}
+
+.display-name {
+  color: white;
+  font-size: 2.5rem; /* bigger */
+  font-weight: 700;
+  margin: 0;
+}
+
+.profile-bio {
+  color: #ccc;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  max-width: 500px;
+}
+
+.generate-planet-btn {
+  background-color: transparent;
+  color: orange;
+  border: 2px solid orange;
+  padding: 10px 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  min-width: 220px;
+  letter-spacing: 1.5px;
+}
+
+.generate-planet-btn:hover,
+.generate-planet-btn:focus {
+  background-color: orange;
+  color: black;
+  outline: none;
+}

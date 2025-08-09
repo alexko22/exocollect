@@ -321,3 +321,19 @@ form.mb-4 {
   border-radius: 8px;
   border: 1px solid var(--brand-orange);
 }
+
+/* ========== Signup Page ========== */
+
+.signup-container {
+    color: white;
+}
+
+.signup-container h2,
+.signup-container h4,
+.signup-container p,
+.signup-container label,
+.signup-container input,
+.signup-container select,
+.signup-container textarea {
+    color: white;
+}

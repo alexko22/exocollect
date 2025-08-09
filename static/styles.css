@@ -61,13 +61,15 @@ body {
 .nav-right {
     display: flex;
     align-items: center;
+    gap: 200px;
     margin-right: 20px;
 }
 
 .nav-btn {
-    height: 60px; /* shrink the buttons to fit the smaller bar */
+    height: 60px; /* same as your other buttons */
     width: auto;
     object-fit: contain;
+    display: block; /* removes inline spacing */
 }
 
 .top-center {
@@ -82,37 +84,43 @@ body {
 }
 
 .login-btn {
-    margin-left: 20px;
+    margin-right: 20px;
+}
+
+.logout-btn {
+    border: none;
+    background: none;
+    margin-top: 15px;
 }
 
 table {
     color: white;
 }
 
-    .home-container {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-        gap: 2rem;
-        padding: 3rem;
-        box-sizing: border-box;
-    }
-    .section {
-        flex: 1;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 2rem;
-        border-radius: 12px;
-        box-sizing: border-box;
-    }
-    .logo-section {
+.home-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    gap: 2rem;
+    padding: 3rem;
+    box-sizing: border-box;
+}
+.section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem;
+    border-radius: 12px;
+    box-sizing: border-box;
+}
+.logo-section {
     background-color: orange;
     padding: 0.5rem;       /* padding around the image */
     border-radius: 12px;
     box-sizing: border-box;
-    }
+}
 
 .logo-section img {
     width: 100%;
@@ -122,12 +130,12 @@ table {
     display: block;      /* remove inline gap */
 }
 
-    .mission-section {
-        background-color: rgb(0, 48, 104);
-        color: white;
-        font-size: 1.2rem;
-        line-height: 1.6;
-    }
+.mission-section {
+    background-color: rgb(0, 48, 104);
+    color: white;
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
 
 .nav_mov {
     margin-right: 32px;

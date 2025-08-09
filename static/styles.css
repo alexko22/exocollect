@@ -136,3 +136,19 @@ table {
 p {
     color:white;
 }
+
+.bio {
+    font-family: Verdana, Geneva, Tahoma, sans-serif
+}
+
+
+
+.title {
+  color: orange;        /* make text orange */
+  font-size: 1.8rem;      /* larger text */
+  font-weight: bold;    /* make it stand out */
+  text-align: center;   /* center horizontally */
+  margin-top: 20px;     /* space from very top of page */
+  margin-bottom: 1px;
+  font-family: Verdana, Geneva, Tahoma, sans-serif
+}

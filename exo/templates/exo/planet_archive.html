@@ -1,57 +1,46 @@
 {% extends 'exo/base.html' %}
 
 {% block content %}
-<h1> Planet Archive </h1>
+<div class="container mt-5 text-light d-flex flex-column align-items-center">
 
-<table>
-    <tr>
-    <td>
-        Image
-    </td>
-    <td>
-        Name
-    </td>
-    <td>
-        Type
-    </td>
-    <td>
-        Atmopshere
-    </td>
-    <td>
-        Mass
-    </td>
-    <td>
-        Gravity
-    </td>
-    <td>
-        Discoverer
-    </td>
-    </tr>
-    {% for planet in planets %}
-    <tr>
-        <td>
-            <img src="{{ planet.get_image }}" alt="Planet Image" class="planet-image" />
-        </td>
-        <td>
-            {{planet.designation}}
-        </td>
-        <td>
-            {{planet.p_type}}
-        </td>
-        <td>
-            {{planet.comp}}
-        </td>
-        <td>
-            {{planet.mass}}
-        </td>
-        <td>
-            {{planet.gravity}}
-        </td>
-        <td>
-            {{planet.profile.display_name}}
-        </td>
-    </tr>
-    {% endfor %}
-</table>
+    <!-- Page title -->
+    <p class="title mb-4">Planet Archive</p>
 
+    <!-- Archive table -->
+    <table class="planet-table w-100">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Atmosphere</th>
+                <th>Mass</th>
+                <th>Gravity</th>
+                <th>Discoverer</th>
+                <th> Planet Page </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in planets %}
+            <tr>
+                <td>
+                    <img src="{{ planet.get_image }}" alt="{{ planet.designation }} image" class="planet-img">
+                </td>
+                <td>{{ planet.designation }}</td>
+                <td>{{ planet.p_type }}</td>
+                <td>{{ planet.comp }}</td>
+                <td>{{ planet.mass }}</td>
+                <td>{{ planet.gravity }}</td>
+                <td>{{ planet.profile.display_name }}</td>
+                <td> <a href="{% url 'show_planet' planet.pk %}" class="btn btn-sm btn-outline-info">Planet Page</a> </td>
+            </tr>
+            {% empty %}
+            <tr>
+                <td colspan="7" class="text-center">No planets found in the archive.</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
 {% endblock %}

@@ -337,3 +337,45 @@ form.mb-4 {
 .signup-container textarea {
     color: white;
 }
+
+/* Label images */
+.label-img {
+  display: block;
+  max-width: 160px;
+  margin: 0 auto 16px;
+}
+
+/* Input styling */
+.auth-card input[type="text"],
+.auth-card input[type="password"] {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid #ffa500;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 1rem;
+}
+
+.auth-card input[type="text"]:focus,
+.auth-card input[type="password"]:focus {
+  outline: none;
+  border-color: #ffa500;
+  box-shadow: 0 0 8px rgba(255,165,0,0.5);
+}
+
+/* Submit button with image only */
+.btn-auth {
+  background: none;
+  border-radius: 10px;
+  border-color: orange;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 100px;
+  
+}
+
+.btn-auth img {
+  max-width: 140px;
+  display: block;
+}

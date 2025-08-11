@@ -1,12 +1,30 @@
 {% extends 'exo/base.html' %}
+{% load static %}
 
 {% block content %}
-<div class="container mt-5 white-text">
-    <h2>Login</h2>
+<div class="fullscreen-container">
+  <div class="auth-card">
+
+    <img src="{% static 'images/text/log_in.png' %}" class="label-img" alt="Log In">
+
     <form method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Login</button>
+
+        <div class="form-group">
+            <img src="{% static 'images/text/username.png' %}" class="label-img" alt="Username">
+            {{ form.username }}
+        </div>
+
+        <div class="form-group">
+            <img src="{% static 'images/text/password.png' %}" class="label-img" alt="Password">
+            {{ form.password }}
+        </div>
+
+        <button type="submit" class="btn-auth">
+            <img src="{% static 'images/text/log_in.png' %}" alt="Login">
+        </button>
+
     </form>
+  </div>
 </div>
 {% endblock %}

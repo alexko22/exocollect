@@ -13,4 +13,5 @@ urlpatterns = [
     path('generate-planet/', views.generate_random_planet, name='generate_planet'),
     path('planet/<int:pk>', PlanetView.as_view(), name="show_planet"),
     path('planets', PlanetArchive.as_view(), name="planet_archive" ),
+    path('profile/update', views.UpdateProfile.as_view(), name="update_profile"),
 ]

@@ -16,6 +16,10 @@
   
   <!-- Bio centered below -->
   <p class="profile-bio mx-auto">{{ profile.bio }}</p>
+
+  <!-- update profle button (prob needs styling) -->
+   <a href="{% url 'update_profile' %}"> Update Profile </a>
+
 </div>
 
 
@@ -27,7 +31,6 @@
 
     <!-- Planets table -->
     <p class="title">Your Planets</p>
-    &nbsp;
     <table class="planet-table w-100">
         <thead>
             <tr>

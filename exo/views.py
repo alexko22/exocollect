@@ -85,6 +85,28 @@ class PlanetArchive(ListView):
 
         return results
 
+class UpdateProfile(LoginRequiredMixin, UpdateView):
+    ''' class to update an existing profile infor '''
+    model = Profiles
+    form_class = UpdateProfileForm
+    template_name = "exo/update_profile_form.html"
+
+    def get_object(self):
+        ''' returns the correct profile instance for the current user '''
+        prof = Profiles.objects.get(user=self.request.user)
+        return prof
+    
+    def get_success_url(self):
+        ''' determine where to go after the operation '''
+        self_obj = self.get_object()
+        pks = self_obj.pk
+        return reverse('profile', kwargs={'pk': pks })
+    
+    # get login url...
+    def get_login_url(self) -> str:
+        '''return the URL required for login (before this step)'''
+        return reverse('login')
+
 # def signup(request):
     # if request.method == "POST":
         # form = UserCreationForm(request.POST)

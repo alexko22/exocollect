@@ -1,0 +1,29 @@
+{% extends 'exo/base.html' %}
+
+
+{% block content %}
+<div class="container mt-5 text-light d-flex flex-column align-items-center">
+    <h1> Update Your Profile: </h1>
+</div>
+
+<!-- form for updating the profile -->
+<form method = 'POST'>
+{% csrf_token %}
+{% csrf_token %}
+    <table class="planet-table w-100">
+    {% for field in form %}
+    <tr>
+        <th>{{field.name}}</th>
+        <td>{{field}}</td>
+    </tr>
+    {% endfor %}
+    <tr>
+        <td></td>
+        <td>
+            <input type='submit' name = 'Update Profile!' value= 'Update Profile!'>
+        </td>
+    </tr>
+    </table>
+</form>
+
+{% endblock %}

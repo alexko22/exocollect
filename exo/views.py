@@ -73,6 +73,18 @@ class PlanetArchive(ListView):
     template_name = "exo/planet_archive.html"
     context_object_name = "planets"
 
+    def get_queryset(self):
+        '''' gets the resulting query set from the filtered planets '''
+        results = super().get_queryset()
+
+        # filter out results based on what was in the user's request
+        if 'type' in self.request.GET:
+            planet_t = self.request.GET['type']
+            if planet_t:
+                results = results.filter(p_type=planet_t)
+
+        return results
+
 # def signup(request):
     # if request.method == "POST":
         # form = UserCreationForm(request.POST)

@@ -1,0 +1,24 @@
+<!-- project/planet_search.html -->
+<!-- filtering form for planet archive -->
+
+<table class="planet-table w-100">
+    <form action= "{% url 'planet_archive' %}">
+        <tr>
+            <th> Planet Type </th>
+            <td> <label for ="type"> Type </label></td>
+            <select name="type" id="type">
+                <option value=""> Any </option>
+                <option value="Terrestrial"> Terrestrial (Rocky) </option>
+                <option value="Gas Giant"> Gas Giant </option>
+                <option value="Ice Giant"> Ice Giant </option>
+                <option value="Ocean Planet"> Ocean Planet </option>
+                <option value="Mini-Neptne"> Mini-Neptune </option>
+                <option value="Dyson Sphere"> Dyson Sphere </option>
+            </select>
+        </tr>
+        <tr>
+            <td><input type="submit" class="searching"></td>
+            <td></td>
+        </tr>
+    </form>
+</table>

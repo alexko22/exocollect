@@ -97,6 +97,17 @@ class Planet(models.Model):
         # Final fallback
         chosen_image = matching_images[0] if matching_images else "default_planet.png"
 
+        if self.p_type == "Dyson-Sphere":
+            if self.mass < 2500.0:
+                return static('images/dyson_sphere_templates/normal_dyson_sphere.png')
+            elif self.mass > 4000.0:
+                return static('images/dyson_sphere_templates/green_dyson_sphere.png')
+            else:
+                return static('images/dyson_sphere_templates/red_dyson_sphere.png')
+        else:
+
+            return static(f'images/planet_templates/{chosen_image}')
+
         return static(f'images/planet_templates/{chosen_image}')
     
     def joined_gasses(self):

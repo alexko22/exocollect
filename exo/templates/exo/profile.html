@@ -31,14 +31,16 @@
 
     <!-- Planets table -->
     <p class="title">Your Planets</p>
-    <table class="planet-table w-100">
+    &nbsp;
+    <table class="planet-table w-100" id="planet-table">
         <thead>
             <tr>
                 <th>Image</th>
+                <th>Name</th>
                 <th>Type</th>
                 <th>Atmosphere</th>
-                <th>Mass</th>
-                <th>Gravity</th>
+                <th>Mass (M⊕) </th>
+                <th>Gravity (G)</th>
                 <th>View</th>
             </tr>
         </thead>
@@ -48,8 +50,9 @@
                 <td>
                     <img src="{{ planet.get_image }}" alt="{{ planet.designation }} image" class="planet-img">
                 </td>
+                <td> {{ planet.designation }} </td>
                 <td>{{ planet.p_type }}</td>
-                <td>{{ planet.comp }}</td>
+                <td>{{ planet.joined_gasses }}</td>
                 <td>{{ planet.mass }}</td>
                 <td>{{ planet.gravity }}</td>
                 <td>
@@ -65,6 +68,13 @@
     </table>
 
 </div>
+
+
+<script>
+  $(document).ready(function() {
+    $('#planet-table').DataTable();
+  });
+</script>
 {% endblock %}
 
 

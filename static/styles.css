@@ -374,3 +374,18 @@ form.mb-4 { margin-bottom: 40px; }
   max-width: 140px;
   display: block;
 }
+
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+  margin: 0 5px;
+}
+
+.dataTables_wrapper .dataTables_filter {
+  margin-bottom: 1rem;
+  text-align: middle;
+}
+
+.dataTables_wrapper {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}

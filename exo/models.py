@@ -98,3 +98,10 @@ class Planet(models.Model):
         chosen_image = matching_images[0] if matching_images else "default_planet.png"
 
         return static(f'images/planet_templates/{chosen_image}')
+    
+    def joined_gasses(self):
+        if not self.comp:
+            return ''
+        # If comp is a list of strings
+        filtered = [gas for gas in self.comp if gas and gas.lower() != 'none']
+        return ', '.join(filtered)

@@ -1,24 +1,32 @@
 <!-- project/planet_search.html -->
 <!-- filtering form for planet archive -->
 
-<table class="planet-table w-100">
-    <form action= "{% url 'planet_archive' %}">
-        <tr>
-            <th> Planet Type </th>
-            <td> <label for ="type"> Type </label></td>
-            <select name="type" id="type">
-                <option value=""> Any </option>
-                <option value="Terrestrial"> Terrestrial (Rocky) </option>
-                <option value="Gas Giant"> Gas Giant </option>
-                <option value="Ice Giant"> Ice Giant </option>
-                <option value="Ocean Planet"> Ocean Planet </option>
-                <option value="Mini-Neptne"> Mini-Neptune </option>
-                <option value="Dyson Sphere"> Dyson Sphere </option>
-            </select>
-        </tr>
-        <tr>
-            <td><input type="submit" class="searching"></td>
-            <td></td>
-        </tr>
-    </form>
-</table>
+<form action="{% url 'planet_archive' %}" method="get" class="w-100 mb-4" style="max-width: 1200px;">
+    <table class="planet-table w-100">
+        <thead>
+            <tr>
+                <th>Planet Type</th>
+                <th>Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <label for="type" class="form-label visually-hidden">Type</label>
+                    <select name="type" id="type" class="form-select">
+                        <option value="">Any</option>
+                        <option value="Terrestrial">Terrestrial (Rocky)</option>
+                        <option value="Gas Giant">Gas Giant</option>
+                        <option value="Ice Giant">Ice Giant</option>
+                        <option value="Ocean Planet">Ocean Planet</option>
+                        <option value="Mini-Neptune">Mini-Neptune</option>
+                        <option value="Dyson Sphere">Dyson Sphere</option>
+                    </select>
+                </td>
+                <td>
+                    <button type="submit" class="btn btn-primary">Search</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>

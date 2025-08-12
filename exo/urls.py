@@ -14,4 +14,5 @@ urlpatterns = [
     path('planet/<int:pk>', PlanetView.as_view(), name="show_planet"),
     path('planets', PlanetArchive.as_view(), name="planet_archive" ),
     path('profile/update', views.UpdateProfile.as_view(), name="update_profile"),
+    path('planet/<int:pk>/delete', DeletePlanet.as_view(), name="delete_planet"),
 ]

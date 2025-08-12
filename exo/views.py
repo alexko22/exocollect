@@ -107,6 +107,24 @@ class UpdateProfile(LoginRequiredMixin, UpdateView):
         '''return the URL required for login (before this step)'''
         return reverse('login')
 
+class DeletePlanet(LoginRequiredMixin, DeleteView):
+    ''' class to delete an existing user planet '''
+    model = Planet
+    template_name = "exo/delete_planet_form.html"
+    context_object_name = "planet"
+
+    # get success url
+    def get_success_url(self):
+        ''' provide a place to go after deleting the planet '''
+        pk = self.kwargs['pk']
+        planet = Planet.objects.get(pk=pk)
+        return reverse('profile', kwargs={'pk': planet.profile.pk })
+
+    # get login url
+    def get_login_url(self) -> str:
+        '''return the URL required for login (before this step)'''
+        return reverse('login')
+
 # def signup(request):
     # if request.method == "POST":
         # form = UserCreationForm(request.POST)

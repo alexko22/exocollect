@@ -1,0 +1,47 @@
+{% extends 'exo/base.html' %}
+
+{% block content %}
+
+
+{% if user.is_authenticated and pro.pk == planet.profile.pk %}
+
+<h2> Are you sure you want to delete this planet? </h2>
+
+  <table class="planet-stats">
+    <tbody>
+      <tr>
+        <th>Type</th>
+        <td>{{ planet.p_type }}</td>
+      </tr>
+      <tr>
+        <th>Atmosphere</th>
+        <td>{{ planet.comp }}</td>
+      </tr>
+      <tr>
+        <th>Gravity</th>
+        <td>{{ planet.gravity }}</td>
+      </tr>
+      <tr>
+        <th>Mass</th>
+        <td>{{ planet.mass }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+<form method = 'POST'>
+{% csrf_token %}
+<button class="new" type="submit"> Delete </button>
+</form>
+
+<form method = 'GET' action = "{% url 'profile' planet.profile.pk %}">
+    {% csrf_token %}
+    <button class="new" type="submit"> Cancel </button>
+</form>
+
+{% else %}
+
+<h2> You cannot delete someone else's Planet! </h2>
+
+{% endif %}
+
+{% endblock %}

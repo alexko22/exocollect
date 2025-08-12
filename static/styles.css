@@ -1,16 +1,35 @@
 /* =========================
    ExoCollect Global Styles
-   Cleaned & organized on 2025-08-09
-   - Consolidated duplicates
-   - Introduced CSS variables
-   - Grouped related sections
-   - Normalized spacing & order
+   Cleaned on 2025-08-12
+   - Fixed static paths (no ../static/)
+   - Centralized font + colors
+   - Removed duplicate/legacy font overrides
+   - Grouped + normalized spacing/order
    ========================= */
 
+/* ===== Custom Font ===== */
+@font-face {
+  font-family: 'SpaceFont';
+  src: url('fonts/spacefont.ttf') format('truetype'); /* swap to woff2 when available */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0-10FFFF;
+}
+@font-face {
+  font-family: 'SpaceFont';
+  src: url('fonts/spacefont.ttf') format('truetype');
+  font-weight: 700; /* map bold to same file for now */
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0-10FFFF;
+}
+
+/* ===== Theme Variables ===== */
 :root {
-  --brand-orange: #ffa500;
+  --brand-orange: #ffd000;
   --brand-navy: rgb(0, 48, 104);
-  --text-light: #ffffff;
+  --text-light: rgb(255, 208, 0);
   --bg-black: #000000;
   --bg-1: #111111;
   --bg-2: #222222;
@@ -24,26 +43,17 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
+  font-family: 'SpaceFont', sans-serif;
+  color: var(--text-light);
 }
 
 body {
-  background: url('../static/images/bg.jpg') no-repeat center center fixed;
+  background: url('images/bg.jpg') no-repeat center center fixed;
   background-size: cover;
-  font-family: Arial, sans-serif;
-  color: var(--text-light);
 }
 
-h1 {
-  color: blue;
-}
-
-p {
-  color: var(--text-light);
-}
-
-table {
-  color: var(--text-light);
-}
+h1 { color: var(--brand-orange); }
+p, table { color: var(--text-light); }
 
 /* ========== Layout Helpers ========== */
 
@@ -118,15 +128,11 @@ table {
   font-size: 30px;
 }
 
-.nav_mov {
-  margin-right: 32px;
-}
+.nav_mov { margin-right: 32px; }
 
 /* ========== Auth Buttons ========== */
 
-.login-btn {
-  margin-right: 20px;
-}
+.login-btn { margin-right: 20px; }
 
 .logout-btn {
   border: none;
@@ -154,9 +160,7 @@ table {
 }
 
 /* Generate button spacing */
-form.mb-4 {
-  margin-bottom: 40px;
-}
+form.mb-4 { margin-bottom: 40px; }
 
 /* ========== Home Page Sections ========== */
 
@@ -204,13 +208,10 @@ form.mb-4 {
 
 /* ========== Utilities & Typography ========== */
 
-.white-text {
-  color: var(--text-light);
-}
+.white-text { color: var(--text-light); }
 
-.bio {
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
+.bio,
+.title { font-family: inherit; } /* remove Verdana override so SpaceFont applies */
 
 .title {
   color: var(--brand-orange);
@@ -218,7 +219,6 @@ form.mb-4 {
   font-weight: bold;
   text-align: center;
   margin: 20px 0 1px;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 /* ========== Profile Page ========== */
@@ -305,9 +305,7 @@ form.mb-4 {
   transition: background-color 0.3s ease;
 }
 
-.planet-table tbody tr:hover {
-  background-color: var(--bg-2);
-}
+.planet-table tbody tr:hover { background-color: var(--bg-2); }
 
 .planet-table tbody td {
   padding: 12px 15px;
@@ -324,9 +322,7 @@ form.mb-4 {
 
 /* ========== Signup Page ========== */
 
-.signup-container {
-    color: white;
-}
+.signup-container { color: white; }
 
 .signup-container h2,
 .signup-container h4,
@@ -335,7 +331,7 @@ form.mb-4 {
 .signup-container input,
 .signup-container select,
 .signup-container textarea {
-    color: white;
+  color: white;
 }
 
 /* Label images */
@@ -372,7 +368,6 @@ form.mb-4 {
   padding: 0;
   cursor: pointer;
   margin-top: 100px;
-  
 }
 
 .btn-auth img {

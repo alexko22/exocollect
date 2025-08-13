@@ -322,16 +322,19 @@ form.mb-4 { margin-bottom: 40px; }
 
 /* ========== Signup Page ========== */
 
-.signup-container { color: white; }
+.signup-container { color: #ffd000; }
 
 .signup-container h2,
 .signup-container h4,
 .signup-container p,
 .signup-container label,
-.signup-container input,
 .signup-container select,
 .signup-container textarea {
-  color: white;
+  color: #ffd000;
+}
+
+.signup-container input {
+  color: black
 }
 
 /* Label images */
@@ -371,7 +374,7 @@ form.mb-4 { margin-bottom: 40px; }
 }
 
 .btn-auth img {
-  max-width: 140px;
+  max-width: 240px;
   display: block;
 }
 
@@ -388,4 +391,114 @@ form.mb-4 { margin-bottom: 40px; }
 .dataTables_wrapper {
   margin-top: 1rem;
   margin-bottom: 2rem;
+}
+
+.signup-container ul,
+.signup-container ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Add spacing between fields */
+.signup-container form p {
+  margin-bottom: 1.5rem; /* space after each form row */
+}
+
+/* Make password help text look cleaner */
+.signup-container .helptext,
+.signup-container ul li {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+
+/* Extra spacing above section titles */
+.signup-container h4 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+/* ===== Profile Info layout in signup ===== */
+.signup-container .form-row,
+.signup-container p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left; /* keep labels aligned to start */
+}
+
+.signup-container label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.signup-container textarea,
+.signup-container input[type="text"],
+.signup-container input[type="password"],
+.signup-container select {
+  width: 80%; /* adjust to taste */
+  max-width: 600px;
+}
+
+/* Remove bullets from password help text */
+.signup-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.signup-container ul li {
+  margin-bottom: 0.3rem;
+}
+
+/* ===== Profile Info layout in signup ===== */
+.signup-container .form-row,
+.signup-container p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left;
+}
+
+.signup-container label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Center and style input/textarea boxes */
+.signup-container textarea,
+.signup-container input[type="text"],
+.signup-container input[type="password"],
+.signup-container select {
+  width: 80%;
+  max-width: 600px;
+  background-color: #000; /* black background */
+  border: 2px solid var(--brand-orange);
+  color: var(--signup-text);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  box-shadow: 0 0 8px rgba(255, 208, 0, 0.5);
+}
+
+/* Focus effect */
+.signup-container textarea:focus,
+.signup-container input[type="text"]:focus,
+.signup-container input[type="password"]:focus,
+.signup-container select:focus {
+  outline: none;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 12px rgba(255, 208, 0, 0.8);
+}
+
+/* Remove bullets from password help text */
+.signup-container ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.signup-container ul li {
+  margin-bottom: 0.3rem;
 }

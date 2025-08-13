@@ -1,15 +1,23 @@
 {% extends 'exo/base.html' %}
+{% load static %}
 
 {% block content %}
 <div class="container mt-5 signup-container">
-    <h2>Signup</h2>
-    <form method="POST">
-        {% csrf_token %}
-        <h4>User Info</h4>
-        {{ user_form.as_p }}
-        <h4>Profile Info</h4>
-        {{ profile_form.as_p }}
-        <button type="submit" class="btn btn-success">Create Account</button>
-    </form>
+    <div class="auth-card p-4">
+        <h2 class="text-center mb-4">Signup</h2>
+        <form method="POST">
+            {% csrf_token %}
+            
+            <h4>User Info</h4>
+            {{ user_form.as_p }}
+            
+            <h4>Profile Info</h4>
+            {{ profile_form.as_p }}
+            
+            <button type="submit" class="btn-auth">
+                <img src="{% static 'images/text/account.png' %}" alt="Account">
+            </button>
+        </form>
+    </div>
 </div>
 {% endblock %}

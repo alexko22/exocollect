@@ -1,0 +1,109 @@
+{% extends 'exo/base.html' %}
+
+{% block content %}
+<div class="container mt-5 text-light d-flex flex-column align-items-center">
+
+    <!-- Page title -->
+    <p class="title mb-4">Leaderboard</p>
+
+    <!-- Earth Similarity Leaderboard -->
+    <p class="subtitle my-3"> Top 5 by Earth Similarity</p>
+    <table class="planet-table w-100" id="earth-similarity-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Atmosphere</th>
+                <th>Mass (M⊕)</th>
+                <th>Gravity (G)</th>
+                <th>Earth Similarity</th>
+                <th>Discoverer</th>
+                <th>Planet Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in top_earth_similarity %}
+            <tr>
+                <td><img src="{{ planet.get_image }}" alt="{{ planet.designation }} image" class="planet-img"></td>
+                <td>{{ planet.designation }}</td>
+                <td>{{ planet.p_type }}</td>
+                <td>{{ planet.joined_gasses }}</td>
+                <td>{{ planet.mass }}</td>
+                <td>{{ planet.gravity }}</td>
+                <td>{{ planet.earth_like}} </td>
+                <td>{{ planet.profile.display_name }}</td>
+                <td><a href="{% url 'show_planet' planet.pk %}" class="btn btn-sm btn-outline-info">Planet Page</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Mass Leaderboard -->
+    <p class="subtitle my-5">Top 5 by Mass</p>
+    <table class="planet-table w-100" id="mass-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Atmosphere</th>
+                <th>Mass (M⊕)</th>
+                <th>Gravity (G)</th>
+                <th>Earth Similarity</th>
+                <th>Discoverer</th>
+                <th>Planet Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in top_mass %}
+            <tr>
+                <td><img src="{{ planet.get_image }}" alt="{{ planet.designation }} image" class="planet-img"></td>
+                <td>{{ planet.designation }}</td>
+                <td>{{ planet.p_type }}</td>
+                <td>{{ planet.joined_gasses }}</td>
+                <td>{{ planet.mass }}</td>
+                <td>{{ planet.gravity }}</td>
+                <td>{{ planet.earth_like}} </td>
+                <td>{{ planet.profile.display_name }}</td>
+                <td><a href="{% url 'show_planet' planet.pk %}" class="btn btn-sm btn-outline-info">Planet Page</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Gravity Leaderboard -->
+    <p class="subtitle my-5">Top 5 by Gravity</p>
+    <table class="planet-table w-100" id="gravity-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Atmosphere</th>
+                <th>Mass (M⊕)</th>
+                <th>Gravity (G)</th>
+                <th>Earth Similarity</th>
+                <th>Discoverer</th>
+                <th>Planet Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in top_gravity %}
+            <tr>
+                <td><img src="{{ planet.get_image }}" alt="{{ planet.designation }} image" class="planet-img"></td>
+                <td>{{ planet.designation }}</td>
+                <td>{{ planet.p_type }}</td>
+                <td>{{ planet.joined_gasses }}</td>
+                <td>{{ planet.mass }}</td>
+                <td>{{ planet.gravity }}</td>
+                <td>{{ planet.earth_like}} </td>
+                <td>{{ planet.profile.display_name }}</td>
+                <td><a href="{% url 'show_planet' planet.pk %}" class="btn btn-sm btn-outline-info">Planet Page</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

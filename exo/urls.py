@@ -15,4 +15,5 @@ urlpatterns = [
     path('planets', PlanetArchive.as_view(), name="planet_archive" ),
     path('profile/update', views.UpdateProfile.as_view(), name="update_profile"),
     path('planet/<int:pk>/delete', DeletePlanet.as_view(), name="delete_planet"),
+    path('leaderboard', Leaderboard.as_view(), name="leaderboard"),
 ]

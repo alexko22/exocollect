@@ -124,6 +124,34 @@ class DeletePlanet(LoginRequiredMixin, DeleteView):
     def get_login_url(self) -> str:
         '''return the URL required for login (before this step)'''
         return reverse('login')
+    
+class Leaderboard(TemplateView):
+    ''' class to show the leaderboard screen and its context '''
+    template_name = "exo/leaderboard.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        all_planets = list(Planet.objects.all())
+        top_earth_similarity = sorted(
+            all_planets,
+            key=lambda p: p.earth_like(),
+            reverse=True
+        )[:5]
+
+        # Sort by model fields using ORM
+        top_mass = Planet.objects.order_by('-mass')[:5]
+        top_gravity = Planet.objects.order_by('-gravity')[:5]
+
+        context.update({
+            'top_earth_similarity': top_earth_similarity,
+            'top_mass': top_mass,
+            'top_gravity': top_gravity,
+        })
+
+        return context
+
+
 
 # def signup(request):
     # if request.method == "POST":

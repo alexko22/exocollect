@@ -20,6 +20,7 @@
                 <th>Atmosphere</th>
                 <th>Mass (M⊕) </th>
                 <th>Gravity (G)</th>
+                <th> Earth Similarity </th>
                 <th>Discoverer</th>
                 <th> Planet Page </th>
             </tr>
@@ -35,6 +36,7 @@
                 <td>{{ planet.joined_gasses }} </td>
                 <td>{{ planet.mass }}</td>
                 <td>{{ planet.gravity }}</td>
+                <td> {{ planet.earth_like }}</td>
                 <td>{{ planet.profile.display_name }}</td>
                 <td> <a href="{% url 'show_planet' planet.pk %}" class="btn btn-sm btn-outline-info">Planet Page</a> </td>
             </tr>

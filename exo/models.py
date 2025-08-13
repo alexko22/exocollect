@@ -116,3 +116,57 @@ class Planet(models.Model):
         # If comp is a list of strings
         filtered = [gas for gas in self.comp if gas and gas.lower() != 'none']
         return ', '.join(filtered)
+    
+    def earth_like(self):
+        ''' returns a percentage score of how similar a plaent is to earth '''
+        score = 0
+        if self.p_type == "Terrestrial":
+            score += 30
+        elif self.p_type == "Ocean Planet":
+            score += 20
+        else:
+            score += 5
+        
+        if "Argon" in self.comp:
+            score += 10
+        if "Nitrogen" in self.comp:
+            score += 20
+        if "Oxygen" in self.comp:
+            score += 20
+        if "Carbon Dioxide" in self.comp:
+            score += 5
+   
+        mass_diff = abs(self.mass - 1)
+        if mass_diff < 0.1:
+            score += 10
+        elif mass_diff < 0.5:
+            score += 8
+        elif mass_diff < 1.0:
+            score += 6
+        elif mass_diff < 2.0:
+            score += 4
+        else:
+            score += 2
+
+        gravity_diff = abs(self.gravity - 1)
+        if gravity_diff < 0.1:
+            score += 10
+        elif gravity_diff < 0.5:
+            score += 8
+        elif gravity_diff < 1.0:
+            score += 6
+        elif gravity_diff < 2.0:
+            score += 4
+        else:
+            score += 2
+
+        return score
+
+
+        
+
+
+
+        
+
+

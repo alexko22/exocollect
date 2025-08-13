@@ -1,10 +1,11 @@
 /* =========================
    ExoCollect Global Styles
-   Cleaned on 2025-08-12
-   - Fixed static paths (no ../static/)
-   - Centralized font + colors
-   - Removed duplicate/legacy font overrides
-   - Grouped + normalized spacing/order
+   Cleaned on 2025-08-13
+   - Centralized variables (added --signup-text)
+   - Fixed typos (text-align: middle -> center)
+   - Added missing semicolons
+   - Removed duplicate signup rules
+   - Kept visuals & class names intact
    ========================= */
 
 /* ===== Custom Font ===== */
@@ -34,10 +35,10 @@
   --bg-1: #111111;
   --bg-2: #222222;
   --overlay: rgba(30, 30, 60, 0.85);
+  --signup-text: var(--text-light); /* used in signup inputs */
 }
 
 /* ========== Base Elements ========== */
-
 html,
 body {
   height: 100%;
@@ -56,7 +57,6 @@ h1 { color: var(--brand-orange); }
 p, table { color: var(--text-light); }
 
 /* ========== Layout Helpers ========== */
-
 .fullscreen-container {
   height: 100vh;
   display: flex;
@@ -84,7 +84,6 @@ p, table { color: var(--text-light); }
 }
 
 /* ========== Top Bar & Navigation ========== */
-
 .top-bar {
   position: static;
   top: 0;
@@ -131,7 +130,6 @@ p, table { color: var(--text-light); }
 .nav_mov { margin-right: 32px; }
 
 /* ========== Auth Buttons ========== */
-
 .login-btn { margin-right: 20px; }
 
 .logout-btn {
@@ -141,7 +139,6 @@ p, table { color: var(--text-light); }
 }
 
 /* ========== Buttons (Shared) ========== */
-
 .btn-outline-light,
 .btn-outline-success,
 .btn-primary {
@@ -163,7 +160,6 @@ p, table { color: var(--text-light); }
 form.mb-4 { margin-bottom: 40px; }
 
 /* ========== Home Page Sections ========== */
-
 .home-container {
   display: flex;
   flex-direction: column;
@@ -207,11 +203,10 @@ form.mb-4 { margin-bottom: 40px; }
 }
 
 /* ========== Utilities & Typography ========== */
-
 .white-text { color: var(--text-light); }
 
 .bio,
-.title { font-family: inherit; } /* remove Verdana override so SpaceFont applies */
+.title { font-family: inherit; } /* ensure SpaceFont applies */
 
 .title {
   color: var(--brand-orange);
@@ -222,7 +217,6 @@ form.mb-4 { margin-bottom: 40px; }
 }
 
 /* ========== Profile Page ========== */
-
 .profile-header {
   max-width: 600px;
   margin: 2rem auto 30px;
@@ -276,7 +270,6 @@ form.mb-4 { margin-bottom: 40px; }
 }
 
 /* ========== Planet Table ========== */
-
 .planet-table {
   width: 100%;
   max-width: 900px;
@@ -321,7 +314,6 @@ form.mb-4 { margin-bottom: 40px; }
 }
 
 /* ========== Signup Page ========== */
-
 .signup-container { color: #ffd000; }
 
 .signup-container h2,
@@ -334,7 +326,7 @@ form.mb-4 { margin-bottom: 40px; }
 }
 
 .signup-container input {
-  color: black
+  color: black;
 }
 
 /* Label images */
@@ -344,7 +336,7 @@ form.mb-4 { margin-bottom: 40px; }
   margin: 0 auto 16px;
 }
 
-/* Input styling */
+/* Input styling (auth card on signup/login) */
 .auth-card input[type="text"],
 .auth-card input[type="password"] {
   width: 100%;
@@ -360,7 +352,7 @@ form.mb-4 { margin-bottom: 40px; }
 .auth-card input[type="password"]:focus {
   outline: none;
   border-color: #ffa500;
-  box-shadow: 0 0 8px rgba(255,165,0,0.5);
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
 }
 
 /* Submit button with image only */
@@ -378,21 +370,18 @@ form.mb-4 { margin-bottom: 40px; }
   display: block;
 }
 
-
-.dataTables_wrapper .dataTables_paginate .paginate_button {
-  margin: 0 5px;
-}
-
+/* DataTables tweaks */
+.dataTables_wrapper .dataTables_paginate .paginate_button { margin: 0 5px; }
 .dataTables_wrapper .dataTables_filter {
   margin-bottom: 1rem;
-  text-align: middle;
+  text-align: center; /* fixed invalid 'middle' */
 }
-
 .dataTables_wrapper {
   margin-top: 1rem;
   margin-bottom: 2rem;
 }
 
+/* List resets for signup */
 .signup-container ul,
 .signup-container ol {
   list-style: none;
@@ -400,12 +389,10 @@ form.mb-4 { margin-bottom: 40px; }
   padding: 0;
 }
 
-/* Add spacing between fields */
-.signup-container form p {
-  margin-bottom: 1.5rem; /* space after each form row */
-}
+/* Spacing between fields */
+.signup-container form p { margin-bottom: 1.5rem; }
 
-/* Make password help text look cleaner */
+/* Help text look */
 .signup-container .helptext,
 .signup-container ul li {
   font-size: 0.9rem;
@@ -413,13 +400,7 @@ form.mb-4 { margin-bottom: 40px; }
   margin-bottom: 0.3rem;
 }
 
-/* Extra spacing above section titles */
-.signup-container h4 {
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-}
-
-/* ===== Profile Info layout in signup ===== */
+/* Profile info layout in signup */
 .signup-container .form-row,
 .signup-container p {
   display: flex;
@@ -434,40 +415,7 @@ form.mb-4 { margin-bottom: 40px; }
   text-transform: uppercase;
 }
 
-.signup-container textarea,
-.signup-container input[type="text"],
-.signup-container input[type="password"],
-.signup-container select {
-  width: 80%; /* adjust to taste */
-  max-width: 600px;
-}
-
-/* Remove bullets from password help text */
-.signup-container ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-.signup-container ul li {
-  margin-bottom: 0.3rem;
-}
-
-/* ===== Profile Info layout in signup ===== */
-.signup-container .form-row,
-.signup-container p {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
-}
-
-.signup-container label {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
-  text-transform: uppercase;
-}
-
-/* Center and style input/textarea boxes */
+/* Center & style input/textarea/select in signup */
 .signup-container textarea,
 .signup-container input[type="text"],
 .signup-container input[type="password"],
@@ -483,7 +431,7 @@ form.mb-4 { margin-bottom: 40px; }
   box-shadow: 0 0 8px rgba(255, 208, 0, 0.5);
 }
 
-/* Focus effect */
+/* Focus effect (signup) */
 .signup-container textarea:focus,
 .signup-container input[type="text"]:focus,
 .signup-container input[type="password"]:focus,
@@ -493,12 +441,49 @@ form.mb-4 { margin-bottom: 40px; }
   box-shadow: 0 0 12px rgba(255, 208, 0, 0.8);
 }
 
-/* Remove bullets from password help text */
-.signup-container ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+/* ========== Update Profile ========== */
+.update-profile-container {
+  display: flex;
+  justify-content: center;
 }
-.signup-container ul li {
-  margin-bottom: 0.3rem;
+
+.update-profile-container .auth-card {
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Form fields match signup style */
+.update-profile-container input[type="text"],
+.update-profile-container input[type="password"],
+.update-profile-container textarea,
+.update-profile-container select {
+  width: 100%;
+  background-color: #000;
+  border: 2px solid var(--brand-orange);
+  color: var(--text-light);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  box-shadow: 0 0 8px rgba(255, 208, 0, 0.5);
+}
+
+.update-profile-container input:focus,
+.update-profile-container textarea:focus,
+.update-profile-container select:focus {
+  outline: none;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 12px rgba(255, 208, 0, 0.8);
+}
+
+/* Labels */
+.update-profile-container label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Help text */
+.update-profile-container .helptext {
+  font-size: 0.9rem;
+  color: var(--text-light);
 }

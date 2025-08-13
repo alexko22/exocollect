@@ -26,8 +26,9 @@
     </tbody>
   </table>
 
-  <h2><a href="{% url 'profile' planet.profile.pk %}" class="back-link">← Back to Profile</a></h2>
+  
   {% if user.is_authenticated and pro.pk == planet.profile.pk %}
+  <h2><a href="{% url 'profile' planet.profile.pk %}" class="back-link">← Back to Profile</a></h2>
   <h2><a href="{% url 'delete_planet' planet.pk %}" class="back-link"> Delete Planet </a></h2>
   {% endif %}
 </div>

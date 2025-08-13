@@ -20,4 +20,4 @@ class UpdateProfileForm(forms.ModelForm):
         ''' associting form to Profile model '''
         model = Profiles
         # fields to be displayed
-        fields = ['display_name', 'bio']
+        fields = ['display_name', 'bio', 'pfp']

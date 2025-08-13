@@ -7,9 +7,17 @@ import random
 
 # Create your models here.
 class Profiles(models.Model):
+    PLANET_CHOICES = [
+        ('Red Planet', 'Red Planet'),
+        ('Purple Planet', 'Purple Planet'),
+        ('Green Planet', 'Green Planet'),
+    ]
+
     display_name = models.TextField(blank=True)
     bio = models.TextField(blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='profile')
+    # new change
+    pfp = models.TextField(choices=PLANET_CHOICES, default="Red Planet")
 
     def __str__(self):
         ''' returns string version of the model '''

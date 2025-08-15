@@ -106,7 +106,7 @@ p, table { color: var(--text-light); }
 .nav-right {
   display: flex;
   align-items: center;
-  gap: 200px;
+  gap: 100px;
   margin-right: 20px;
 }
 

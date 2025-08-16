@@ -252,3 +252,278 @@ def generate_random_planet(request):
     )
 
     return redirect('show_planet', pk=planet.pk)
+
+import random
+from typing import Dict, Tuple, Optional
+from django.shortcuts import render, redirect
+
+# ----- Game config -----
+WIN_TARGET = 2  # best of three → first to 2 round wins
+BEATS = {"rock": "scissors", "paper": "rock", "scissors": "paper"}
+
+
+# ----- Helpers -----
+def _new_type_map() -> Dict[int, str]:
+    """
+    Create a fresh random assignment of numbers 1..9 into three types:
+    3 numbers → rock, 3 → paper, 3 → scissors.
+    Example: {2:'rock', 7:'rock', 9:'rock', 1:'paper', ...}
+    """
+    numbers = list(range(1, 10))
+    random.shuffle(numbers)
+    type_map: Dict[int, str] = {}
+    for i, n in enumerate(numbers):
+        if i < 3:
+            type_map[n] = "rock"
+        elif i < 6:
+            type_map[n] = "paper"
+        else:
+            type_map[n] = "scissors"
+    return type_map
+
+
+def _ensure_state(request) -> dict:
+    """
+    Ensure a session-backed game state exists for the current match.
+    Also migrates older/bad states (no type_map, wrong key types, etc).
+    """
+    state = request.session.get("card_game")
+
+    def fresh_state():
+        tm = _new_type_map()
+        return {
+            "player_wins": 0,
+            "bot_wins": 0,
+            "round": 1,
+            "history": [],
+            "player_remaining": sorted(tm.keys()),
+            "bot_remaining": sorted(tm.keys()),
+            "type_map": tm,
+        }
+
+    # No state yet → create fresh
+    if not isinstance(state, dict):
+        state = fresh_state()
+        request.session["card_game"] = state
+        return state
+
+    changed = False
+
+    # Validate type_map
+    tm = state.get("type_map")
+    if not isinstance(tm, dict) or len(tm) != 9:
+        state = fresh_state()
+        request.session["card_game"] = state
+        return state
+
+    # --- Normalize keys to ints (fix for '5' vs 5) ---
+    try:
+        tm_int = {int(k): v for k, v in tm.items()}
+    except Exception:
+        state = fresh_state()
+        request.session["card_game"] = state
+        return state
+
+    # Ensure values are only valid types
+    valid_types = {"rock", "paper", "scissors"}
+    if any(v not in valid_types for v in tm_int.values()):
+        state = fresh_state()
+        request.session["card_game"] = state
+        return state
+
+    # Write back normalized map if changed
+    if tm_int != tm:
+        state["type_map"] = tm_int
+        changed = True
+    tm = tm_int
+
+    # Normalize remaining lists to ints and keep only keys present in tm
+    def norm_remaining(lst):
+        if not isinstance(lst, list):
+            return sorted(tm.keys())
+        acc = []
+        for x in lst:
+            try:
+                xi = int(x)
+                if xi in tm:
+                    acc.append(xi)
+            except Exception:
+                pass
+        # if empty after normalization, repopulate with all keys
+        return sorted(acc) if acc else sorted(tm.keys())
+
+    pr = norm_remaining(state.get("player_remaining"))
+    br = norm_remaining(state.get("bot_remaining"))
+    if pr != state.get("player_remaining"):
+        state["player_remaining"] = pr
+        changed = True
+    if br != state.get("bot_remaining"):
+        state["bot_remaining"] = br
+        changed = True
+
+    # Backfill counters
+    if not isinstance(state.get("player_wins"), int):
+        state["player_wins"] = 0; changed = True
+    if not isinstance(state.get("bot_wins"), int):
+        state["bot_wins"] = 0; changed = True
+    if not isinstance(state.get("round"), int) or state["round"] < 1:
+        state["round"] = 1; changed = True
+    if not isinstance(state.get("history"), list):
+        state["history"] = []; changed = True
+
+    if changed:
+        request.session["card_game"] = state
+        request.session.modified = True
+
+    return state
+
+def _reset_state(request):
+    if "card_game" in request.session:
+        del request.session["card_game"]
+
+
+def card_type(card_num: int, type_map: dict) -> str:
+    # Be tolerant of int/str keys in the session
+    if card_num in type_map:
+        return type_map[card_num]
+    if str(card_num) in type_map:
+        return type_map[str(card_num)]
+    if int(card_num) in type_map:
+        return type_map[int(card_num)]
+    # Fallback (shouldn't happen after normalization)
+    raise KeyError(f"card {card_num} not in type_map")
+
+
+def decide_winner(
+    player_card: int, bot_card: int, type_map: Dict[int, str]
+) -> Tuple[str, str]:
+    """
+    Returns (outcome, reason)
+    outcome ∈ {'player', 'bot', 'tie'}
+    """
+    pt = card_type(player_card, type_map)
+    bt = card_type(bot_card, type_map)
+
+    if pt != bt:
+        if BEATS[pt] == bt:
+            return "player", f"{pt.capitalize()} beats {bt}."
+        else:
+            return "bot", f"{bt.capitalize()} beats {pt}."
+    else:
+        if player_card > bot_card:
+            return "player", f"Both {pt}; {player_card} > {bot_card}."
+        elif bot_card > player_card:
+            return "bot", f"Both {pt}; {bot_card} > {player_card}."
+        else:
+            return "tie", f"Both {pt}; both {player_card}."
+
+
+# ----- View -----
+def card_game(request):
+    """
+    One match of best-of-three (first to 2).
+    - Types (rock/paper/scissors) override numbers.
+    - If same type, higher number wins.
+    - Each card number can only be used once per side during the match.
+    - Numbers 1..9 are randomly assigned to types per match.
+    """
+    # Reset match if requested
+    if request.GET.get("reset"):
+        _reset_state(request)
+        # If your URLs are namespaced, change to redirect("exo:card_game")
+        return redirect("card_game")
+
+    state = _ensure_state(request)
+    type_map: Dict[int, str] = state["type_map"]
+
+    picked = request.GET.get("card")
+    player_card: Optional[int] = None
+    bot_card: Optional[int] = None
+    result = None
+    reason = None
+    banner = None
+
+    finished = state["player_wins"] >= WIN_TARGET or state["bot_wins"] >= WIN_TARGET
+
+    # Defensive end if somehow out of cards
+    if not finished and (not state["player_remaining"] or not state["bot_remaining"]):
+        finished = True
+
+    if picked and not finished:
+        try:
+            player_card = int(picked)
+        except ValueError:
+            player_card = None
+
+        # Validate player pick is still available
+        if player_card not in state["player_remaining"]:
+            banner = "You already used that card. Pick another."
+            player_card = None
+        else:
+            # Bot chooses only from its remaining cards
+            bot_card = random.choice(state["bot_remaining"])
+
+            outcome, reason = decide_winner(player_card, bot_card, type_map)
+
+            # Record round
+            state["history"].append({
+                "round": state["round"],
+                "player_card": player_card,
+                "player_type": card_type(player_card, type_map),
+                "bot_card": bot_card,
+                "bot_type": card_type(bot_card, type_map),
+                "outcome": outcome,
+                "reason": reason,
+            })
+
+            # Remove used cards
+            state["player_remaining"].remove(player_card)
+            state["bot_remaining"].remove(bot_card)
+
+            # Score
+            if outcome == "player":
+                state["player_wins"] += 1
+                result = "Player wins the round!"
+            elif outcome == "bot":
+                state["bot_wins"] += 1
+                result = "Bot wins the round!"
+            else:
+                result = "Round is a tie."
+
+            # Advance round and possibly finish
+            state["round"] += 1
+            finished = state["player_wins"] >= WIN_TARGET or state["bot_wins"] >= WIN_TARGET
+
+            # Persist
+            request.session["card_game"] = state
+            request.session.modified = True
+
+    # Match winner text
+    match_winner = None
+    if finished:
+        if state["player_wins"] > state["bot_wins"]:
+            match_winner = "Player"
+        elif state["bot_wins"] > state["player_wins"]:
+            match_winner = "Bot"
+        else:
+            match_winner = "Tie"
+
+    return render(request, "exo/card_game.html", {
+        "cards": sorted(type_map.keys()),
+        "type_map": type_map,
+        "player_card": player_card,
+        "player_type": card_type(player_card, type_map) if player_card else None,
+        "bot_card": bot_card,
+        "bot_type": card_type(bot_card, type_map) if bot_card else None,
+        "result": result,
+        "reason": reason,
+        "score_player": state["player_wins"],
+        "score_bot": state["bot_wins"],
+        "round_num": state["round"],
+        "history": state["history"],
+        "finished": finished,
+        "match_winner": match_winner,
+        "player_remaining": state["player_remaining"],
+        "bot_remaining": state["bot_remaining"],
+        "banner": banner,
+    })

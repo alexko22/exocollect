@@ -1,0 +1,126 @@
+{% extends 'exo/base.html' %}
+{% load static %}
+{% load extras %}
+
+{% block content %}
+<style>
+  .game-wrap { max-width: 780px; margin: 24px auto; padding: 16px; background: #fff; border-radius: 12px; box-shadow: 0 4px 18px rgba(0,0,0,.06); }
+  .title { margin: 0 0 8px; }
+  .subtle { color: #666; }
+  .pill { display:inline-block; padding:2px 8px; border-radius:999px; background:#eee; margin-left:6px; font-size: .9em; }
+  .score { font-size: 1.1rem; margin: 8px 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(3, minmax(90px, 1fr)); gap: 10px; max-width: 420px; }
+  .card-btn { padding: 12px 10px; font-size: 16px; border-radius: 10px; border: 1px solid #ddd; background: #fafafa; cursor: pointer; }
+  .card-btn:hover { background: #f1f1f1; }
+  .card-btn[disabled] { opacity:.5; cursor:not-allowed; }
+  table { border-collapse: collapse; margin-top: 14px; width: 100%; }
+  th, td { border: 1px solid #e4e4e4; padding: 8px 10px; text-align: left; }
+  th { background: #f9f9f9; }
+  .actions a { display:inline-block; margin-right: 10px; }
+  .banner { color:#b00; font-weight: 600; margin-bottom: 10px; }
+</style>
+
+<div class="game-wrap">
+  <h1 class="title">1–9 Card Game <span class="subtle">(Rock/Paper/Scissors override)</span></h1>
+
+  <div class="score">
+    <strong>Score:</strong> Player {{ score_player }} — {{ score_bot }} Bot
+    <span style="margin-left:12px;"><strong>Round:</strong> {{ round_num }}</span>
+  </div>
+
+  {% if finished %}
+    <h2>Match over: {{ match_winner }} wins the match!</h2>
+    <div class="actions">
+      {# If namespaced, change to url 'exo:card_game' #}
+      <a class="btn btn-primary" href="{% url 'card_game' %}?reset=1">Start new match</a>
+    </div>
+  {% else %}
+    <p>
+      Pick a card to play this round. Types override numbers:
+      <span class="pill">rock</span> &lt; <span class="pill">paper</span> &lt; <span class="pill">scissors</span> &lt; <span class="pill">rock</span>.
+      If types match, higher number wins. Each card can be used <em>once per match</em>.
+    </p>
+
+    {% if banner %}
+      <div class="banner">{{ banner }}</div>
+    {% endif %}
+
+    <!-- Pick form: disable cards you already used -->
+    <form method="get" class="grid">
+      {% for card in cards %}
+        {% with t=type_map|get:card %}
+          {% if card in player_remaining %}
+            <button class="card-btn" type="submit" name="card" value="{{ card }}">
+              {{ card }} <span class="pill">{{ t }}</span>
+            </button>
+          {% else %}
+            <button class="card-btn" type="button" disabled>
+              {{ card }} <span class="pill">{{ t }}</span>
+              <div style="font-size:12px;">used</div>
+            </button>
+          {% endif %}
+        {% endwith %}
+      {% endfor %}
+    </form>
+
+    {% if result %}
+      <h3 style="margin-top:16px;">{{ result }}</h3>
+      <p>{{ reason }}</p>
+
+      {% if player_card and bot_card %}
+        <p>
+          <strong>Player:</strong> {{ player_card }}
+          <span class="pill">{{ type_map|get:player_card }}</span>
+          &nbsp; | &nbsp;
+          <strong>Bot:</strong> {{ bot_card }}
+          <span class="pill">{{ type_map|get:bot_card }}</span>
+        </p>
+      {% endif %}
+    {% endif %}
+  {% endif %}
+
+  <!-- Remaining cards display -->
+  <div style="margin-top:12px; font-size:14px;">
+    <strong>Your remaining:</strong>
+    {% for c in player_remaining %}
+      {{ c }}{% if not forloop.last %}, {% endif %}
+    {% empty %} none {% endfor %}
+    <br/>
+    <strong>Bot remaining:</strong>
+    {% for c in bot_remaining %}
+      {{ c }}{% if not forloop.last %}, {% endif %}
+    {% empty %} none {% endfor %}
+  </div>
+
+  <!-- Round history -->
+  {% if history and history|length > 0 %}
+    <h3 style="margin-top:16px;">Round History</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Player</th>
+          <th>Bot</th>
+          <th>Outcome</th>
+          <th>Why</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for r in history %}
+          <tr>
+            <td>{{ r.round }}</td>
+            <td>{{ r.player_card }} <span class="pill">{{ r.player_type }}</span></td>
+            <td>{{ r.bot_card }} <span class="pill">{{ r.bot_type }}</span></td>
+            <td>{% if r.outcome == 'player' %}Player{% elif r.outcome == 'bot' %}Bot{% else %}Tie{% endif %}</td>
+            <td>{{ r.reason }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% endif %}
+
+  <div class="actions" style="margin-top:12px;">
+    <a class="btn btn-outline-secondary" href="{% url 'card_game' %}?reset=1">Reset match</a>
+  </div>
+</div>
+{% endblock %}

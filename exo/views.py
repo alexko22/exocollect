@@ -142,11 +142,13 @@ class Leaderboard(TemplateView):
         # Sort by model fields using ORM
         top_mass = Planet.objects.order_by('-mass')[:5]
         top_gravity = Planet.objects.order_by('-gravity')[:5]
+        lowest_mass = Planet.objects.order_by('mass')[:5]
 
         context.update({
             'top_earth_similarity': top_earth_similarity,
             'top_mass': top_mass,
             'top_gravity': top_gravity,
+            'lowest_mass': lowest_mass,
         })
 
         return context

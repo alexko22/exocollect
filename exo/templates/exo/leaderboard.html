@@ -4,10 +4,11 @@
 <div class="container mt-5 text-light d-flex flex-column align-items-center">
 
     <!-- Page title -->
-    <p class="title mb-4">Leaderboard</p>
+    <p class="title mb-4">Leaderboards</p>
 
     <!-- Earth Similarity Leaderboard -->
-    <p class="subtitle my-3"> Top 5 by Earth Similarity</p>
+    <p class="subtitle my-3"> Most Earth-like Planets </p>
+    <p class="profile-bio mx-auto"> Planets with the highest Earth-Similarity Score </p>
     <table class="planet-table w-100" id="earth-similarity-table">
         <thead>
             <tr>
@@ -39,8 +40,11 @@
         </tbody>
     </table>
 
+    &nbsp;
+
     <!-- Mass Leaderboard -->
-    <p class="subtitle my-5">Top 5 by Mass</p>
+    <p class="subtitle my-3">Largest planets by mass </p>
+    <p class="profile-bio mx-auto"> Discoveries with the largest size (mass) </p>
     <table class="planet-table w-100" id="mass-table">
         <thead>
             <tr>
@@ -72,8 +76,46 @@
         </tbody>
     </table>
 
+    &nbsp;
+
+    <!-- Mass Leaderboard -->
+    <p class="subtitle my-3">Smallest planets by mass </p>
+    <p class="profile-bio mx-auto"> Discoveries with the smallest size (mass) </p>
+    <table class="planet-table w-100" id="mass-table">
+        <thead>
+            <tr>
+                <th>Image</th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Atmosphere</th>
+                <th>Mass (M⊕)</th>
+                <th>Gravity (G)</th>
+                <th>Earth Similarity</th>
+                <th>Discoverer</th>
+                <th>Planet Page</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for planet in lowest_mass %}
+            <tr>
+                <td><img src="{{ planet.get_image }}" alt="{{ planet.designation }} image" class="planet-img"></td>
+                <td>{{ planet.designation }}</td>
+                <td>{{ planet.p_type }}</td>
+                <td>{{ planet.joined_gasses }}</td>
+                <td>{{ planet.mass }}</td>
+                <td>{{ planet.gravity }}</td>
+                <td>{{ planet.earth_like}} </td>
+                <td>{{ planet.profile.display_name }}</td>
+                <td><a href="{% url 'show_planet' planet.pk %}" class="btn btn-sm btn-outline-info">Planet Page</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    &nbsp;
     <!-- Gravity Leaderboard -->
-    <p class="subtitle my-5">Top 5 by Gravity</p>
+    <p class="subtitle my-3">Highest Gravity Worlds</p>
+    <p class="profile-bio mx-auto"> Discoveries with the highest gravity </p>
     <table class="planet-table w-100" id="gravity-table">
         <thead>
             <tr>

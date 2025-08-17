@@ -170,8 +170,32 @@ class Planet(models.Model):
 
         return score
 
+class Deck(models.Model):
+    ''' model for exoclash game '''
+    name = models.TextField(blank=True)
+    p1 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p1')
+    p2 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p2')
+    p3 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p3')
+    p4 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p4')
+    p5 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p5')
+    p6 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p6')
+    p7 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p7')
+    p8 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p8')
+    p9 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p9')
+    p10 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p10')
+    p11 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p11')
+    p12 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p12')
+    p13 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p13')
+    p14 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p14')
+    p15 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p15')
+    p16 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p16')
+    p17 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p17')
+    p18 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p18')
+    p19 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p19')
+    p20 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p20')
 
-        
+    # will define some helper methods here later...
+ 
 
 
 

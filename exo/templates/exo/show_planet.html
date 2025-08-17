@@ -13,7 +13,7 @@
       </tr>
       <tr>
         <th>Atmosphere</th>
-        <td>{{ planet.comp }}</td>
+        <td>{{ planet.joined_gasses }}</td>
       </tr>
       <tr>
         <th>Gravity</th>
@@ -23,12 +23,25 @@
         <th>Mass</th>
         <td>{{ planet.mass }}</td>
       </tr>
+      <tr>
+        <th> Earth-likeness </th>
+        <td> {{planet.earth_like}} </td>
+      </tr>
+      <tr>
+        <th> Discoverer </th>
+        <td> {{planet.profile.display_name}}</td>
+      </tr>
     </tbody>
   </table>
 
-  
+  <p class="title mb-4">About this planet:</p>
+  <p class="profile-bio mx-auto"> This is where a brief one paragraph description of the planet will go. </p>
+
+  &nbsp;
+
   {% if user.is_authenticated and pro.pk == planet.profile.pk %}
   <h2><a href="{% url 'profile' planet.profile.pk %}" class="back-link">← Back to Profile</a></h2>
+  &nbsp;
   <h2><a href="{% url 'delete_planet' planet.pk %}" class="back-link"> Delete Planet </a></h2>
   {% endif %}
 </div>
@@ -41,8 +54,8 @@
   }
 
   .planet-container {
-    max-width: 600px;
-    margin: 3rem auto;
+    max-width: 900px;
+    margin: 2rem auto;
     padding: 2rem;
     background: #111111;
     border-radius: 12px;
@@ -73,8 +86,8 @@
 
   .planet-stats th,
   .planet-stats td {
-    padding: 0.75rem 1.25rem;
-    text-align: left;
+    padding: 0.6rem 1.25rem;
+    text-align: center;
   }
 
   .planet-stats th {

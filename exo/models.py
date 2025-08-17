@@ -173,6 +173,7 @@ class Planet(models.Model):
 class Deck(models.Model):
     ''' model for exoclash game '''
     name = models.TextField(blank=True)
+    profile = models.ForeignKey(Profiles, on_delete=models.CASCADE, related_name='deck_prof', null=True, blank=True)
     p1 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p1')
     p2 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p2')
     p3 = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='p3')

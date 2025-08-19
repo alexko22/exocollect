@@ -40,6 +40,29 @@ class Planet(models.Model):
         ''' returns a string version of the model '''
         return f'{self.designation}'
     
+    # calculate mass percentile
+    def mass_percent(self):
+        ''' calculates a planets mass percentile '''
+        masses = list(Planet.objects.values_list("mass", flat=True).order_by("mass"))
+        if not masses:
+            return None
+
+        rank = sum(1 for m in masses if m <= self.mass)
+        percentile = 100 * rank / len(masses)
+        return percentile
+    
+    # calculate the gravity percent
+    def grav_percent(self):
+        ''' calculates the gravity mass percentile '''
+        gravities = list(Planet.objects.values_list("gravity", flat=True).order_by("gravity"))
+        if not gravities:
+            return None
+        
+        rank = sum(1 for g in gravities if g <= self.gravity)
+        percentile = 100 * rank / len(gravities)
+        return percentile
+    
+    
     # this is a work in progress
     @property
     def get_image(self):

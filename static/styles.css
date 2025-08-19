@@ -487,3 +487,7 @@ form.mb-4 { margin-bottom: 40px; }
   font-size: 0.9rem;
   color: var(--text-light);
 }
+
+.red {
+  color: red !important
+}

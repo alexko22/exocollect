@@ -35,12 +35,23 @@
   </table>
 
   <p class="title mb-4">About this planet:</p>
-  <p class="profile-bio mx-auto"> This is where a brief one paragraph description of the planet will go. </p>
-
+  {% if planet.p_type == "Dyson-Sphere" %}
+  <p class="profile-bio mx-auto"> 
+    {{ planet.designation }} is a {{ planet.p_type }}, which is a theoretical megastructure. 
+    It is designed to completely encircle a star and capture a large percentage of its energy output. 
+    The concept was first popularized by physicist Freeman Dyson as a way to illustrate advanced energy harvesting. 
+    If built, such a structure would provide virtually limitless power to its civilization, but it also presents immense engineering and material challenges. 
+    In science fiction, Dyson Spheres often symbolize the peak of technological advancement and ambition. 
+  </p>
+  {% else %}
+  <p class="profile-bio mx-auto"> 
+    {{planet.designation}} is a {{planet.type}} world with an atmosphere containing {{planet.joined_gasses}}. It is in the {{planet.mass_percent}}th percentile for mass among all disocvered planets on ExoCollect, and the {{planet.grav_percent}}th percentile for gravity. This world is a discovery of {{planet.profile.display_name}}.
+  </p>
+  {% endif %}
   &nbsp;
 
   {% if user.is_authenticated and pro.pk == planet.profile.pk %}
-  <h2><a href="{% url 'profile' planet.profile.pk %}" class="back-link">← Back to Profile</a></h2>
+  <h2><a href="{% url 'profile' planet.profile.pk %}" class="back-link">My Profile</a></h2>
   &nbsp;
   <h2><a href="{% url 'delete_planet' planet.pk %}" class="back-link"> Delete Planet </a></h2>
   {% endif %}

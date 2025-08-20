@@ -1,0 +1,493 @@
+/* =========================
+   ExoCollect Global Styles
+   Cleaned on 2025-08-13
+   - Centralized variables (added --signup-text)
+   - Fixed typos (text-align: middle -> center)
+   - Added missing semicolons
+   - Removed duplicate signup rules
+   - Kept visuals & class names intact
+   ========================= */
+
+/* ===== Custom Font ===== */
+@font-face {
+  font-family: 'SpaceFont';
+  src: url('fonts/spacefont.ttf') format('truetype'); /* swap to woff2 when available */
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0-10FFFF;
+}
+@font-face {
+  font-family: 'SpaceFont';
+  src: url('fonts/spacefont.ttf') format('truetype');
+  font-weight: 700; /* map bold to same file for now */
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0-10FFFF;
+}
+
+/* ===== Theme Variables ===== */
+:root {
+  --brand-orange: #ffd000;
+  --brand-navy: rgb(0, 48, 104);
+  --text-light: rgb(255, 208, 0);
+  --bg-black: #000000;
+  --bg-1: #111111;
+  --bg-2: #222222;
+  --overlay: rgba(30, 30, 60, 0.85);
+  --signup-text: var(--text-light); /* used in signup inputs */
+}
+
+/* ========== Base Elements ========== */
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: 'SpaceFont', sans-serif;
+  color: var(--text-light);
+}
+
+body {
+  background: url('images/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+h1 { color: var(--brand-orange); }
+p, table { color: var(--text-light); }
+
+/* ========== Layout Helpers ========== */
+.fullscreen-container {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+.content-box {
+  background-color: var(--overlay);
+  padding: 40px;
+  border-radius: 15px;
+  color: var(--text-light);
+  width: 100%;
+  max-width: 700px;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ========== Top Bar & Navigation ========== */
+.top-bar {
+  position: static;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100px;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  z-index: 1000;
+}
+
+.logo-left {
+  height: 100px;
+  margin-left: 0;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 100px;
+  margin-right: 20px;
+}
+
+.nav-btn {
+  height: 60px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.top-center {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  color: var(--brand-orange);
+  white-space: nowrap;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.nav_mov { margin-right: 32px; }
+
+/* ========== Auth Buttons ========== */
+.login-btn { margin-right: 20px; }
+
+.logout-btn {
+  border: none;
+  background: none;
+  margin-top: 15px;
+}
+
+/* ========== Buttons (Shared) ========== */
+.btn-outline-light,
+.btn-outline-success,
+.btn-primary {
+  min-width: 160px;
+}
+
+.btn-outline-info {
+  border-color: var(--brand-orange);
+  color: var(--brand-orange);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-outline-info:hover {
+  background-color: var(--brand-orange);
+  color: var(--bg-black);
+}
+
+/* Generate button spacing */
+form.mb-4 { margin-bottom: 40px; }
+
+/* ========== Home Page Sections ========== */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  gap: 2rem;
+  padding: 3rem;
+  box-sizing: border-box;
+}
+
+.section {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 2rem;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.logo-section {
+  background-color: var(--brand-orange);
+  padding: 0.5rem;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.logo-section img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* use 'cover' if you need full fill/crop */
+  border-radius: 8px;
+  display: block;
+}
+
+.mission-section {
+  background-color: var(--brand-navy);
+  color: var(--text-light);
+  font-size: 1.2rem;
+  line-height: 1.6;
+}
+
+/* ========== Utilities & Typography ========== */
+.white-text { color: var(--text-light); }
+
+.bio,
+.title { font-family: inherit; } /* ensure SpaceFont applies */
+
+.title {
+  color: var(--brand-orange);
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 20px 0 1px;
+}
+
+/* ========== Profile Page ========== */
+.profile-header {
+  max-width: 600px;
+  margin: 2rem auto 30px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.profile-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid var(--brand-orange);
+  margin-bottom: 0.5rem;
+}
+
+.display-name {
+  color: var(--text-light);
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.profile-bio {
+  color: #cccccc;
+  font-family: 'Courier New', monospace;
+  font-size: 1.1rem;
+  max-width: 500px;
+}
+
+/* Generate Planet Button */
+.generate-planet-btn {
+  background-color: transparent;
+  color: var(--brand-orange);
+  border: 2px solid var(--brand-orange);
+  padding: 10px 25px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: pointer;
+  min-width: 220px;
+  letter-spacing: 1.5px;
+}
+
+.generate-planet-btn:hover,
+.generate-planet-btn:focus {
+  background-color: var(--brand-orange);
+  color: var(--bg-black);
+  outline: none;
+}
+
+/* ========== Planet Table ========== */
+.planet-table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background-color: var(--bg-black);
+  color: var(--text-light);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 15px rgba(255, 165, 0, 0.6); /* subtle orange glow */
+}
+
+.planet-table thead tr {
+  background-color: var(--bg-1);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+.planet-table thead th {
+  padding: 12px 15px;
+  border-bottom: 2px solid var(--brand-orange);
+}
+
+.planet-table tbody tr {
+  background-color: var(--bg-1);
+  transition: background-color 0.3s ease;
+}
+
+.planet-table tbody tr:hover { background-color: var(--bg-2); }
+
+.planet-table tbody td {
+  padding: 12px 15px;
+  vertical-align: middle;
+}
+
+.planet-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid var(--brand-orange);
+}
+
+/* ========== Signup Page ========== */
+.signup-container { color: #ffd000; }
+
+.signup-container h2,
+.signup-container h4,
+.signup-container p,
+.signup-container label,
+.signup-container select,
+.signup-container textarea {
+  color: #ffd000;
+}
+
+.signup-container input {
+  color: black;
+}
+
+/* Label images */
+.label-img {
+  display: block;
+  max-width: 160px;
+  margin: 0 auto 16px;
+}
+
+/* Input styling (auth card on signup/login) */
+.auth-card input[type="text"],
+.auth-card input[type="password"] {
+  width: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  border: 2px solid #ffa500;
+  color: #fff;
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 1rem;
+}
+
+.auth-card input[type="text"]:focus,
+.auth-card input[type="password"]:focus {
+  outline: none;
+  border-color: #ffa500;
+  box-shadow: 0 0 8px rgba(255, 165, 0, 0.5);
+}
+
+/* Submit button with image only */
+.btn-auth {
+  background: none;
+  border-radius: 10px;
+  border-color: orange;
+  padding: 0;
+  cursor: pointer;
+  margin-top: 100px;
+}
+
+.btn-auth img {
+  max-width: 240px;
+  display: block;
+}
+
+/* DataTables tweaks */
+.dataTables_wrapper .dataTables_paginate .paginate_button { margin: 0 5px; }
+.dataTables_wrapper .dataTables_filter {
+  margin-bottom: 1rem;
+  text-align: center; /* fixed invalid 'middle' */
+}
+.dataTables_wrapper {
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+/* List resets for signup */
+.signup-container ul,
+.signup-container ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Spacing between fields */
+.signup-container form p { margin-bottom: 1.5rem; }
+
+/* Help text look */
+.signup-container .helptext,
+.signup-container ul li {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+
+/* Profile info layout in signup */
+.signup-container .form-row,
+.signup-container p {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: left; /* keep labels aligned to start */
+}
+
+.signup-container label {
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+/* Center & style input/textarea/select in signup */
+.signup-container textarea,
+.signup-container input[type="text"],
+.signup-container input[type="password"],
+.signup-container select {
+  width: 80%;
+  max-width: 600px;
+  background-color: #000; /* black background */
+  border: 2px solid var(--brand-orange);
+  color: var(--signup-text);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  box-shadow: 0 0 8px rgba(255, 208, 0, 0.5);
+}
+
+/* Focus effect (signup) */
+.signup-container textarea:focus,
+.signup-container input[type="text"]:focus,
+.signup-container input[type="password"]:focus,
+.signup-container select:focus {
+  outline: none;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 12px rgba(255, 208, 0, 0.8);
+}
+
+/* ========== Update Profile ========== */
+.update-profile-container {
+  display: flex;
+  justify-content: center;
+}
+
+.update-profile-container .auth-card {
+  max-width: 600px;
+  width: 100%;
+}
+
+/* Form fields match signup style */
+.update-profile-container input[type="text"],
+.update-profile-container input[type="password"],
+.update-profile-container textarea,
+.update-profile-container select {
+  width: 100%;
+  background-color: #000;
+  border: 2px solid var(--brand-orange);
+  color: var(--text-light);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 1rem;
+  box-shadow: 0 0 8px rgba(255, 208, 0, 0.5);
+}
+
+.update-profile-container input:focus,
+.update-profile-container textarea:focus,
+.update-profile-container select:focus {
+  outline: none;
+  border-color: var(--brand-orange);
+  box-shadow: 0 0 12px rgba(255, 208, 0, 0.8);
+}
+
+/* Labels */
+.update-profile-container label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Help text */
+.update-profile-container .helptext {
+  font-size: 0.9rem;
+  color: var(--text-light);
+}
+
+.red {
+  color: red !important
+}

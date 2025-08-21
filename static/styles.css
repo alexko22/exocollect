@@ -135,7 +135,6 @@ p, table { color: var(--text-light); }
 .logout-btn {
   border: none;
   background: none;
-  margin-top: 15px;
 }
 
 /* ========== Buttons (Shared) ========== */
@@ -486,8 +485,4 @@ form.mb-4 { margin-bottom: 40px; }
 .update-profile-container .helptext {
   font-size: 0.9rem;
   color: var(--text-light);
-}
-
-.red {
-  color: red !important
 }

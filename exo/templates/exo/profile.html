@@ -32,6 +32,7 @@
     <!-- Planets table -->
     <p class="title">Your Planets</p>
     &nbsp;
+    {% if profile.get_planets %}
     <table class="planet-table w-100" id="planet-table">
         <thead>
             <tr>
@@ -61,11 +62,14 @@
             </tr>
             {% empty %}
             <tr>
-                <td colspan="6" class="text-center">No planets found yet.</td>
+                <td colspan="7" class="text-center">No planets found yet.</td>
             </tr>
             {% endfor %}
         </tbody>
     </table>
+    {% else %}
+    <p class="profile-bio mx-auto"> You dont have any planets yet! </p>
+    {% endif %}
 
 </div>
 

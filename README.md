@@ -1,8 +1,8 @@
 ***Next Up:***
-- Add the TOS / Privacy Policy in the placeholder
+- Add the TOS / Privacy Policy in the placeholder X
 - Clean up all the code nicely / bug fixes
-- Create a Google Feedback form and put in placeholder on home screen
-- Hide the card game for now until done...
+- Create a Google Feedback form and put in placeholder on home screen X
+- Hide the card game for now until done... X
 - Deploy
 
 **Eventually:**

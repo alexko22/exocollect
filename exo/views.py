@@ -268,7 +268,7 @@ from typing import Dict, List, Tuple, Optional
 from django.shortcuts import render, redirect
 
 # ---------- Game config ----------
-COMPOSITIONS = ["carbon", "sulfur", "water"]
+GAME_COMPS = ["carbon", "sulfur", "water"]
 COLORS = ["red", "blue", "yellow"]  # stellar/atmospheric variation
 
 # Dominance cycle: carbon > sulfur > water > carbon
@@ -283,7 +283,7 @@ def _new_card(cid: int) -> Dict:
     return {
         "id": cid,
         "num": random.randint(1, 9),
-        "type": random.choice(COMPOSITIONS),
+        "type": random.choice(GAME_COMPS),
         "color": random.choice(COLORS),
     }
 

@@ -134,7 +134,7 @@ class Planet(models.Model):
             elif self.mass > 4000.0:
                 return static('images/dyson_sphere_templates/green_dyson_sphere.png')
             else:
-                return static('images/dyson_sphere_templates/red_dyson_sphere.png')
+                return static('images/dyson_sphere_templates/orange_dyson_sphere.png')
         else:
 
             return static(f'images/planet_templates/{chosen_image}')

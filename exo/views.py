@@ -21,6 +21,14 @@ class ShowHome(TemplateView):
     ''' class to connect home URL to correct HTML template '''
     template_name = "exo/show_home.html"
 
+class PrivacyScreen(TemplateView):
+    ''' class to connect privacy policy URL to correct HTML template '''
+    template_name = "exo/privacy_policy.html"
+
+class TOSScreen(TemplateView):
+    ''' class to connect TOS URL to correct HTML template '''
+    template_name = "exo/TOS.html"
+
 class CreateProfileView(View):
     ''' class to handle user and profile creation '''
     def get(self, request):

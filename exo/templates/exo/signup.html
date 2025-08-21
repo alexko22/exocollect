@@ -15,6 +15,8 @@
             {{ profile_form.as_p }}
 
             <p class="red"> IMPORTANT: By creating an account you agree to our Privacy Policy and Terms of Service which can be found here: </p>
+            <h2><a href="{% url 'privacy' %}" class="back-link"> Privacy Policy </a></h2>
+            <h2><a href="{% url 'TOS' %}" class="back-link"> Terms of Service </a></h2>
             
             <button type="submit" class="btn-auth">
                 <img src="{% static 'images/text/account.png' %}" alt="Account">
@@ -22,4 +24,23 @@
         </form>
     </div>
 </div>
+
+<style>
+    .back-link {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    color: #00aaff;
+    text-decoration: none;
+    font-weight: 600;
+    border: 2px solid #00aaff;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  .back-link:hover,
+  .back-link:focus {
+    background-color: #00aaff;
+    color: #000;
+  }
+</style>
 {% endblock %}

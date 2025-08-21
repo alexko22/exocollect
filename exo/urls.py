@@ -1,10 +1,13 @@
+# urls.py
+# defines all URLs for the application
+
 # imports
 from django.urls import path
 from .views import *
 from django.contrib.auth import views as auth_views
 from . import views
 
-# url patterns
+# url patterns for ExoCollect
 urlpatterns = [
     path('signup/', views.CreateProfileView.as_view(), name="signup"),
     path('login/', CustomLoginView.as_view(), name="login"),
@@ -17,4 +20,6 @@ urlpatterns = [
     path('planet/<int:pk>/delete', DeletePlanet.as_view(), name="delete_planet"),
     path('leaderboard', Leaderboard.as_view(), name="leaderboard"),
     path("card-game/", views.card_game, name="card_game"),
+    path('tos/', TOSScreen.as_view(), name="TOS"),
+    path('privacy_policy/', PrivacyScreen.as_view(), name="privacy"),
 ]

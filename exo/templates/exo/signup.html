@@ -14,6 +14,7 @@
             <h4>Profile Info</h4>
             {{ profile_form.as_p }}
 
+            <p> This is a demo version of ExoCollect. Accounts/data may be deleted at any time, and there is no account recovery. </p>
             <p class="red"> IMPORTANT: By creating an account you agree to our Privacy Policy and Terms of Service which can be found here: </p>
             <h2><a href="{% url 'privacy' %}" class="back-link"> Privacy Policy </a></h2>
             <h2><a href="{% url 'TOS' %}" class="back-link"> Terms of Service </a></h2>
@@ -41,6 +42,10 @@
   .back-link:focus {
     background-color: #00aaff;
     color: #000;
+  }
+
+  .red {
+    color: red !important;
   }
 </style>
 {% endblock %}

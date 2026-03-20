@@ -48,7 +48,3 @@ This version of ExoCollect represents an early development stage:
 - Future versions may significantly differ from this build  
 
 ---
-
-- Terms  
-- Privacy  
-- Sec  

@@ -1,6 +1,6 @@
 # ExoCollect (Alpha Build)
 
-ExoCollect is an interactive, educational web platform centered around space exploration and planet discovery. Users can explore procedurally generated planets, engage with game-like mechanics, and learn about astronomy in an engaging and competitive environment.
+ExoCollect is an interactive, educational web platform centered around space exploration and planet discovery. Users can "explore" (generate) their own virtual planets, each with attributes generated at frequencies matching real-life astronomical values. Planets you find are unique and have never seen by another user previously!
 
 **Note:** This repository contains code from the alpha build of ExoCollect. Features, structure, and functionality are subject to change and may not reflect the current or final version of the project.
 
@@ -10,7 +10,7 @@ ExoCollect is an interactive, educational web platform centered around space exp
 
 ExoCollect combines education and gameplay by allowing users to:
 
-- Discover and collect unique, procedurally generated planets  
+- Discover and collect uniquely generated planets  
 - Learn about planetary characteristics and space science  
 - Compete on leaderboards and track progress  
 - Engage in interactive features like planet-based mini-games  
@@ -23,8 +23,8 @@ This project is designed to make learning about space more engaging through gami
 
 - Backend: Django (Python)  
 - Frontend: HTML, CSS, JavaScript  
-- Database: SQLite (development)  
-- Other Tools: Custom procedural generation logic  
+- Database: SQLite (development); PostgreSQL (production)
+- Hosting: Heroku (not active right now)
 
 ---
 
@@ -33,7 +33,7 @@ This project is designed to make learning about space more engaging through gami
 - User authentication (login/signup)  
 - Procedural planet generation system  
 - User profiles and basic progression tracking  
-- Leaderboard functionality  
+- Leaderboard functionality & sorting
 - Early-stage interactive components  
 
 ---
